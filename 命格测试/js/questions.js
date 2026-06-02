@@ -530,6 +530,88 @@ const BASE_QUESTIONS = [
     { label: '知道未来但不能改变，至少心里有数', value: 1 },
     { label: '都想要', value: 2 },
     { label: '不知道未来但可以创造，人生才有惊喜', value: 3 }
+  ]},
+
+  // ═══════════════════════════════════════
+  // 扩充题目 - 五行直接相关
+  // ═══════════════════════════════════════
+
+  // D10 金 - 决断、刚毅
+  { id: 'q76', dim: 'D10', text: '你更喜欢哪种金属质感？', options: [
+    { label: '银色，低调内敛', value: 1 },
+    { label: '金色，经典大气', value: 2 },
+    { label: '钢铁色，硬核刚毅', value: 3 }
+  ]},
+
+  { id: 'q77', dim: 'D10', text: '你做决定时更相信？', options: [
+    { label: '直觉，感觉对就对', value: 1 },
+    { label: '分析，数据说话', value: 2 },
+    { label: '果断，想了就做', value: 3 }
+  ]},
+
+  // D11 木 - 成长、生机
+  { id: 'q78', dim: 'D11', text: '你更喜欢哪种植物？', options: [
+    { label: '仙人掌，好养活', value: 1 },
+    { label: '绿萝，生机勃勃', value: 2 },
+    { label: '多肉，慢慢长大很有成就感', value: 3 }
+  ]},
+
+  { id: 'q79', dim: 'D11', text: '你对"成长"的态度是？', options: [
+    { label: '顺其自然，该长就长', value: 1 },
+    { label: '需要阳光雨露，慢慢来', value: 2 },
+    { label: '拼命向上，冲破天花板', value: 3 }
+  ]},
+
+  // D12 水 - 智慧、灵动
+  { id: 'q80', dim: 'D12', text: '你更喜欢哪种水？', options: [
+    { label: '山间小溪，清澈见底', value: 1 },
+    { label: '大海，深不可测', value: 2 },
+    { label: '雨滴，灵动自由', value: 3 }
+  ]},
+
+  { id: 'q81', dim: 'D12', text: '你处理问题的方式更像？', options: [
+    { label: '滴水穿石，慢慢磨', value: 1 },
+    { label: '随波逐流，见机行事', value: 2 },
+    { label: '洪水猛兽，直接冲', value: 3 }
+  ]},
+
+  // D13 火 - 热情、表达
+  { id: 'q82', dim: 'D13', text: '你更喜欢哪种火？', options: [
+    { label: '烛光，温暖浪漫', value: 1 },
+    { label: '篝火，热闹欢聚', value: 2 },
+    { label: '烈火，激情燃烧', value: 3 }
+  ]},
+
+  { id: 'q83', dim: 'D13', text: '你的热情更像？', options: [
+    { label: '壁炉，持续稳定', value: 1 },
+    { label: '烟花，绚烂短暂', value: 2 },
+    { label: '野火，燎原之势', value: 3 }
+  ]},
+
+  // D14 土 - 稳定、包容
+  { id: 'q84', dim: 'D14', text: '你更喜欢哪种土？', options: [
+    { label: '黑土，肥沃滋养', value: 1 },
+    { label: '黄土，厚重踏实', value: 2 },
+    { label: '沙土，自由流动', value: 3 }
+  ]},
+
+  { id: 'q85', dim: 'D14', text: '你的性格更像？', options: [
+    { label: '大树，扎根深处', value: 1 },
+    { label: '磐石，岿然不动', value: 2 },
+    { label: '流水，随遇而安', value: 3 }
+  ]},
+
+  // D15 宿命感 - 玄学
+  { id: 'q86', dim: 'D15', text: '你对"前世今生"的态度是？', options: [
+    { label: '不信，人死如灯灭', value: 1 },
+    { label: '觉得有可能', value: 2 },
+    { label: '信，我梦到过前世', value: 3 }
+  ]},
+
+  { id: 'q87', dim: 'D15', text: '你相信"第六感"吗？', options: [
+    { label: '不信，那是错觉', value: 1 },
+    { label: '偶尔会有', value: 2 },
+    { label: '经常，准到离谱', value: 3 }
   ]}
 ];
 
