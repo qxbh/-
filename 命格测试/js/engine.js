@@ -40,39 +40,15 @@ const XuanxueEngine = (() => {
 
   /**
    * 根据当前答案和阶段，选择下一轮的题目
-   * 针对性轮：从所有方向的30题中选15题，方向匹配的优先
+   * 简化版：直接返回所有题目
    * @param {'base'|'targeted'|'tiebreaker'} phase
    * @param {Object} answers - 当前已答题目
-   * @returns {Array} 本轮要展示的题目 (15题)
+   * @returns {Array} 本轮要展示的题目
    */
   function selectQuestions(phase, answers) {
-    const answeredIds = new Set(Object.keys(answers));
-
     if (phase === 'base') {
       return BASE_QUESTIONS;
     }
-
-    if (phase === 'targeted') {
-      const cluster = detectCluster(answers);
-      // 收集所有方向的题目
-      const allTargeted = Object.values(TARGETED_QUESTIONS).flat();
-      // 排除已答过的
-      const fresh = allTargeted.filter(q => !answeredIds.has(q.id));
-      // 按方向优先级排序：命中的方向排前面
-      const clusterQuestions = TARGETED_QUESTIONS[cluster] || [];
-      const clusterIds = new Set(clusterQuestions.map(q => q.id));
-      const prioritized = [
-        ...fresh.filter(q => clusterIds.has(q.id)),
-        ...fresh.filter(q => !clusterIds.has(q.id))
-      ];
-      return prioritized.slice(0, 15);
-    }
-
-    if (phase === 'tiebreaker') {
-      const fresh = TIEBREAKER_QUESTIONS.filter(q => !answeredIds.has(q.id));
-      return fresh.slice(0, 15);
-    }
-
     return [];
   }
 
@@ -89,8 +65,7 @@ const XuanxueEngine = (() => {
    * 最终计算
    */
   function computeResult(answers) {
-    const allQuestions = [...BASE_QUESTIONS, ...Object.values(TARGETED_QUESTIONS).flat(), ...TIEBREAKER_QUESTIONS];
-    return computeResultFrom(allQuestions, answers);
+    return computeResultFrom(BASE_QUESTIONS, answers);
   }
 
   /**

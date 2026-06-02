@@ -42,10 +42,7 @@
   let wasComplete = false;
   let totalAnswered = 0;
 
-  const TOTAL_BASE = 15;
-  const TOTAL_TARGETED = 15;
-  const TOTAL_TIEBREAKER = 15;
-  const TOTAL_ALL = TOTAL_BASE + TOTAL_TARGETED + TOTAL_TIEBREAKER;
+  const TOTAL_ALL = 35;
 
   // ═══════════════════════════════════════
   // 工具函数
@@ -124,8 +121,8 @@
     totalAnswered = 0;
     closeCompletionModal();
 
-    // 第一阶段：基础轮
-    currentQuestions = shuffle(XuanxueEngine.selectQuestions('base', answers));
+    // 直接加载所有题目
+    currentQuestions = shuffle([...BASE_QUESTIONS]);
     showScreen(testScreen);
     renderQuestion();
     updateProgress();
@@ -137,60 +134,22 @@
   }
 
   // ═══════════════════════════════════════
-  // 进入下一阶段
-  // ═══════════════════════════════════════
-  function advancePhase() {
-    if (currentPhase === 'base') {
-      currentPhase = 'targeted';
-      currentIndex = 0;
-      currentQuestions = shuffle(XuanxueEngine.selectQuestions('targeted', answers));
-      renderPhaseTransition('🎯 正在分析你的命格方向...', '已锁定你的命格方向，现在推送针对性问题。');
-    } else if (currentPhase === 'targeted') {
-      currentPhase = 'tiebreaker';
-      currentIndex = 0;
-      currentQuestions = shuffle(XuanxueEngine.selectQuestions('tiebreaker', answers));
-      renderPhaseTransition('⚡ 最终校准中...', '最后15题，用来精准锁定你的命格。');
-    }
-  }
-
-  function renderPhaseTransition(title, subtitle) {
-    questionList.innerHTML = `
-      <div class="phase-transition">
-        <div class="phase-icon">✨</div>
-        <div class="phase-title">${title}</div>
-        <div class="phase-subtitle">${subtitle}</div>
-      </div>
-    `;
-
-    setTimeout(() => {
-      renderQuestion();
-    }, 1200);
-  }
-
-  // ═══════════════════════════════════════
   // 题目渲染
   // ═══════════════════════════════════════
   function renderQuestion() {
     const q = currentQuestions[currentIndex];
     if (!q) {
-      // 当前阶段题目答完了
-      if (currentPhase === 'tiebreaker') {
-        // 所有阶段完成
-        checkAllComplete();
-      } else {
-        advancePhase();
-      }
+      checkAllComplete();
       return;
     }
 
     const answeredCount = Object.keys(answers).length;
     const labels = ['A', 'B', 'C'];
-    const phaseLabel = currentPhase === 'base' ? '基础轮' : currentPhase === 'targeted' ? '精准轮' : '决胜轮';
 
     questionList.innerHTML = `
       <div class="question">
         <div class="question-meta">
-          <span class="badge">${phaseLabel} · 第 ${currentIndex + 1} / ${currentQuestions.length} 题</span>
+          <span class="badge">第 ${currentIndex + 1} / ${currentQuestions.length} 题</span>
           <span class="question-stage-copy">已完成 ${answeredCount} 题，选完自动下一题。</span>
         </div>
         <div class="question-title">${q.text}</div>
@@ -222,7 +181,6 @@
           if (currentIndex < currentQuestions.length - 1) {
             nextQuestion();
           } else {
-            // 当前阶段最后一题答完，进入下一阶段或提交
             checkAllComplete();
           }
         }, 350);
@@ -231,34 +189,11 @@
   }
 
   function checkAllComplete() {
-    // 判断是否所有阶段都答完了
-    const baseDone = BASE_QUESTIONS.every(q => answers[q.id] !== undefined);
-    const targetedDone = Object.values(TARGETED_QUESTIONS).flat().every(q => answers[q.id] !== undefined || !currentQuestions.find(cq => cq.id === q.id));
-    const tiebreakerDone = TIEBREAKER_QUESTIONS.every(q => answers[q.id] !== undefined || !currentQuestions.find(cq => cq.id === q.id));
+    const allAnswered = currentQuestions.every(q => answers[q.id] !== undefined);
 
-    // 更简单的判断：如果当前阶段的题目都答完了，且没有更多阶段
-    if (currentPhase === 'tiebreaker' && currentIndex >= currentQuestions.length - 1) {
-      // 再检查一下有没有下一阶段
-      const nextTargeted = XuanxueEngine.selectQuestions('targeted', answers);
-      const nextTiebreaker = XuanxueEngine.selectQuestions('tiebreaker', answers);
-
-      if (currentPhase === 'tiebreaker' && nextTiebreaker.length === 0) {
-        // 真的全答完了
-        updateProgress();
-        openCompletionModal();
-        return;
-      }
-    }
-
-    // 检查当前阶段题目是否都答完了
-    const currentPhaseAnswered = currentQuestions.every(q => answers[q.id] !== undefined);
-    if (currentPhaseAnswered) {
-      if (currentPhase === 'tiebreaker') {
-        updateProgress();
-        openCompletionModal();
-      } else {
-        advancePhase();
-      }
+    if (allAnswered) {
+      updateProgress();
+      openCompletionModal();
     }
   }
 
@@ -278,12 +213,8 @@
     if (testHint) {
       if (allDone) {
         testHint.textContent = '全部答完了！直接提交看结果。';
-      } else if (currentPhase === 'base') {
-        testHint.textContent = '基础扫描中... 选完自动下一题。';
-      } else if (currentPhase === 'targeted') {
-        testHint.textContent = '命格方向已锁定，精准匹配中...';
       } else {
-        testHint.textContent = '最终校准，马上出结果！';
+        testHint.textContent = '选完自动下一题，马上出结果！';
       }
     }
 
@@ -329,8 +260,8 @@
   // ═══════════════════════════════════════
   function submitTest() {
     totalAnswered = Object.keys(answers).length;
-    if (totalAnswered < 15) {
-      alert(`至少需要答完基础轮的15题`);
+    if (totalAnswered < TOTAL_ALL) {
+      alert(`需要答完全部${TOTAL_ALL}题`);
       return;
     }
 
