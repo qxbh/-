@@ -126,11 +126,11 @@ const XuanxueEngine = (() => {
 
     // 8. 生成五行分析
     const wuxing = {
-      金: { level: levels.D2, name: wuxingLevelName('D2', levels.D2) },
-      木: { level: levels.D3, name: wuxingLevelName('D3', levels.D3) },
-      水: { level: levels.D5, name: wuxingLevelName('D5', levels.D5) },
-      火: { level: levels.D6, name: wuxingLevelName('D6', levels.D6) },
-      土: { level: levels.D13, name: wuxingLevelName('D13', levels.D13) }
+      金: { level: levels.D2, name: getSpecialLevelName('D2', levels.D2) },
+      木: { level: levels.D3, name: getSpecialLevelName('D3', levels.D3) },
+      水: { level: levels.D5, name: getSpecialLevelName('D5', levels.D5) },
+      火: { level: levels.D6, name: getSpecialLevelName('D6', levels.D6) },
+      土: { level: levels.D13, name: getSpecialLevelName('D13', levels.D13) }
     };
 
     // 9. 生成神煞感应
