@@ -1,12 +1,12 @@
 /**
- * 玄学人格测试 - 分阶段题库 (100题)
- * 基础轮(20) → 针对性轮(50) → 决胜轮(30) = 100题
+ * 玄学人格测试 - 分阶段题库 (180题)
+ * 基础轮(45) → 针对性轮(90) → 决胜轮(45) = 180题
  * 每阶段随机抽15题，总共45题
  * 题库越大，重测越不会腻
  */
 
 // ═══════════════════════════════════════
-// 第一阶段：基础轮 (20题，每维度至少1题)
+// 第一阶段：基础轮 (75题，每维度至少3题)
 // ═══════════════════════════════════════
 const BASE_QUESTIONS = [
   // D1 官星感应
@@ -129,12 +129,413 @@ const BASE_QUESTIONS = [
     { label: '路过，不看', value: 1 },
     { label: '嗯，挺绿的', value: 2 },
     { label: '停下来，感受一下它的生命力', value: 3 }
+  ]},
+
+  // ═══════════════════════════════════════
+  // 扩充题目 - 社会现象类
+  // ═══════════════════════════════════════
+
+  // D1 官星感应 - 社会现象
+  { id: 'q21', dim: 'D1', text: '公司团建你一般是什么角色？', options: [
+    { label: '默默吃饭，别叫我', value: 1 },
+    { label: '参与但不组织', value: 2 },
+    { label: '我来安排大家！', value: 3 }
+  ]},
+
+  // D2 财星感应 - 社会现象
+  { id: 'q22', dim: 'D2', text: '双十一你通常？', options: [
+    { label: '不参与，平时也不缺什么', value: 1 },
+    { label: '买点刚需的', value: 2 },
+    { label: '提前一个月做攻略，零点准时抢', value: 3 }
+  ]},
+
+  // D3 印星感应 - 社会现象
+  { id: 'q23', dim: 'D3', text: '你对"知识付费"的态度是？', options: [
+    { label: '免费的不香吗', value: 1 },
+    { label: '有价值的会买', value: 2 },
+    { label: '买了就是学了', value: 3 }
+  ]},
+
+  // D4 桃花感应 - 社会现象
+  { id: 'q24', dim: 'D4', text: '你在地铁上被要过微信吗？', options: [
+    { label: '没有，我长得这么安全吗', value: 1 },
+    { label: '有过一两次', value: 2 },
+    { label: '经常，我都装没听见', value: 3 }
+  ]},
+
+  // D5 驿马感应 - 社会现象
+  { id: 'q25', dim: 'D5', text: '你对"数字游民"的生活方式？', options: [
+    { label: '不现实，还是得有固定住处', value: 1 },
+    { label: '羡慕，但做不到', value: 2 },
+    { label: '这就是我想要的生活', value: 3 }
+  ]},
+
+  // D6 华盖感应 - 社会现象
+  { id: 'q26', dim: 'D6', text: '你觉得"躺平"和"内卷"哪个更可怕？', options: [
+    { label: '躺平，浪费生命', value: 1 },
+    { label: '内卷，消耗自己', value: 2 },
+    { label: '都不可怕，可怕的是既躺不平又卷不赢', value: 3 }
+  ]},
+
+  // D7 食神能量 - 社会现象
+  { id: 'q27', dim: 'D7', text: '你对"网红餐厅"的态度是？', options: [
+    { label: '不去，都是智商税', value: 1 },
+    { label: '偶尔去打卡', value: 2 },
+    { label: '每家新开的都要去', value: 3 }
+  ]},
+
+  // D8 伤官能量 - 社会现象
+  { id: 'q28', dim: 'D8', text: '看到网上有人带节奏，你会？', options: [
+    { label: '不关我的事', value: 1 },
+    { label: '看看就好，不评论', value: 2 },
+    { label: '必须下场battle', value: 3 }
+  ]},
+
+  // D9 比肩能量 - 社会现象
+  { id: 'q29', dim: 'D9', text: '你对"996"的态度是？', options: [
+    { label: '没办法，为了生活', value: 1 },
+    { label: '能接受，但要有回报', value: 2 },
+    { label: '拒绝，我有自己的生活', value: 3 }
+  ]},
+
+  // D10 金气 - 社会现象
+  { id: 'q30', dim: 'D10', text: '你点外卖会花多长时间？', options: [
+    { label: '半小时起步，纠结到店家打烊', value: 1 },
+    { label: '十分钟左右', value: 2 },
+    { label: '三分钟内下单，从不纠结', value: 3 }
+  ]},
+
+  // D11 木气 - 社会现象
+  { id: 'q31', dim: 'D11', text: '你对"元宇宙"的概念？', options: [
+    { label: '听不懂，也不想懂', value: 1 },
+    { label: '有点意思，但跟我没关系', value: 2 },
+    { label: '已经在研究怎么入场了', value: 3 }
+  ]},
+
+  // D12 水气 - 社会现象
+  { id: 'q32', dim: 'D12', text: '你对"断舍离"的态度是？', options: [
+    { label: '扔东西？不可能', value: 1 },
+    { label: '偶尔会清理一下', value: 2 },
+    { label: '定期清理，保持极简', value: 3 }
+  ]},
+
+  // D13 火气 - 社会现象
+  { id: 'q33', dim: 'D13', text: '你对"热榜"的态度是？', options: [
+    { label: '从不看，跟我没关系', value: 1 },
+    { label: '偶尔看看，了解一下', value: 2 },
+    { label: '每天必看，不能脱节', value: 3 }
+  ]},
+
+  // D14 土气 - 社会现象
+  { id: 'q34', dim: 'D14', text: '你对"长期主义"的态度是？', options: [
+    { label: '太慢了，我要快速见效', value: 1 },
+    { label: '认同，但很难坚持', value: 2 },
+    { label: '这就是我的人生信条', value: 3 }
+  ]},
+
+  // D15 宿命感 - 社会现象
+  { id: 'q35', dim: 'D15', text: '你相信"缘分"吗？', options: [
+    { label: '不信，都是人为的', value: 1 },
+    { label: '半信半疑', value: 2 },
+    { label: '信，该来的总会来', value: 3 }
+  ]},
+
+  // ═══════════════════════════════════════
+  // 扩充题目 - 幽默类型类
+  // ═══════════════════════════════════════
+
+  // D6 华盖感应 - 幽默类型
+  { id: 'q36', dim: 'D6', text: '你觉得哪种幽默最高级？', options: [
+    { label: '谐音梗（虽然土但好笑）', value: 1 },
+    { label: '黑色幽默（笑着笑着就哭了）', value: 2 },
+    { label: '冷幽默（需要三秒反应那种）', value: 3 }
+  ]},
+
+  // D7 食神能量 - 幽默类型
+  { id: 'q37', dim: 'D7', text: '你笑点高还是低？', options: [
+    { label: '很高，很少有东西能逗笑我', value: 1 },
+    { label: '正常水平', value: 2 },
+    { label: '很低，看个表情包都能笑半天', value: 3 }
+  ]},
+
+  // D8 伤官能量 - 幽默类型
+  { id: 'q38', dim: 'D8', text: '你自嘲的频率是？', options: [
+    { label: '从不自嘲，我很好', value: 1 },
+    { label: '偶尔', value: 2 },
+    { label: '经常，自嘲是最高级的幽默', value: 3 }
+  ]},
+
+  // D9 比肩能量 - 幽默类型
+  { id: 'q39', dim: 'D9', text: '你讲冷笑话的频率是？', options: [
+    { label: '从不，太尬了', value: 1 },
+    { label: '偶尔讲一个', value: 2 },
+    { label: '经常，我就爱看别人无语的样子', value: 3 }
+  ]},
+
+  // D10 金气 - 幽默类型
+  { id: 'q40', dim: 'D10', text: '你能接受的玩笑底线是？', options: [
+    { label: '开什么都不行', value: 1 },
+    { label: '熟人可以，生人不行', value: 2 },
+    { label: '随便开，我心态好', value: 3 }
+  ]},
+
+  // D11 木气 - 幽默类型
+  { id: 'q41', dim: 'D11', text: '你对"梗文化"的态度是？', options: [
+    { label: '看不懂，也不想懂', value: 1 },
+    { label: '知道一些，但不追', value: 2 },
+    { label: '每天都刷新梗，跟不上就焦虑', value: 3 }
+  ]},
+
+  // D12 水气 - 幽默类型
+  { id: 'q42', dim: 'D12', text: '你对"地狱笑话"的态度是？', options: [
+    { label: '接受不了，太过分了', value: 1 },
+    { label: '看情况，有些还好', value: 2 },
+    { label: '很喜欢，越黑暗越好笑', value: 3 }
+  ]},
+
+  // D13 火气 - 幽默类型
+  { id: 'q43', dim: 'D13', text: '你能在严肃场合忍住不笑吗？', options: [
+    { label: '能，我很有定力', value: 1 },
+    { label: '看情况', value: 2 },
+    { label: '不能，越严肃我越想笑', value: 3 }
+  ]},
+
+  // D14 土气 - 幽默类型
+  { id: 'q44', dim: 'D14', text: '你对"土味情话"的态度是？', options: [
+    { label: '尬到脚趾抠地', value: 1 },
+    { label: '偶尔觉得还行', value: 2 },
+    { label: '我觉得很甜啊', value: 3 }
+  ]},
+
+  // D15 宿命感 - 幽默类型
+  { id: 'q45', dim: 'D15', text: '你对"玄学段子"的态度是？', options: [
+    { label: '不信，纯娱乐', value: 1 },
+    { label: '看着玩', value: 2 },
+    { label: '转发！万一灵呢', value: 3 }
+  ]},
+
+  // ═══════════════════════════════════════
+  // 扩充题目 - 价值观类
+  // ═══════════════════════════════════════
+
+  // D1 官星感应 - 价值观
+  { id: 'q46', dim: 'D1', text: '你觉得人生最重要的事是？', options: [
+    { label: '自由', value: 1 },
+    { label: '成功', value: 2 },
+    { label: '掌控感', value: 3 }
+  ]},
+
+  // D2 财星感应 - 价值观
+  { id: 'q47', dim: 'D2', text: '钱和自由只能选一个，你选？', options: [
+    { label: '自由，钱够用就行', value: 1 },
+    { label: '看情况', value: 2 },
+    { label: '钱，有了钱才有自由', value: 3 }
+  ]},
+
+  // D3 印星感应 - 价值观
+  { id: 'q48', dim: 'D3', text: '你觉得读书的意义是？', options: [
+    { label: '找个好工作', value: 1 },
+    { label: '开阔眼界', value: 2 },
+    { label: '成为更好的自己', value: 3 }
+  ]},
+
+  // D4 桃花感应 - 价值观
+  { id: 'q49', dim: 'D4', text: '你觉得爱情和面包哪个重要？', options: [
+    { label: '面包，没有物质基础不行', value: 1 },
+    { label: '都重要', value: 2 },
+    { label: '爱情，有情饮水饱', value: 3 }
+  ]},
+
+  // D5 驿马感应 - 价值观
+  { id: 'q50', dim: 'D5', text: '你觉得"稳定"和"精彩"哪个更重要？', options: [
+    { label: '稳定，安稳最重要', value: 1 },
+    { label: '看情况', value: 2 },
+    { label: '精彩，人生苦短', value: 3 }
+  ]},
+
+  // D6 华盖感应 - 价值观
+  { id: 'q51', dim: 'D6', text: '你觉得人生的意义是？', options: [
+    { label: '享受当下', value: 1 },
+    { label: '留下点什么', value: 2 },
+    { label: '找到自己', value: 3 }
+  ]},
+
+  // D7 食神能量 - 价值观
+  { id: 'q52', dim: 'D7', text: '你觉得"仪式感"重要吗？', options: [
+    { label: '不重要，太形式主义', value: 1 },
+    { label: '偶尔需要', value: 2 },
+    { label: '很重要，生活需要仪式感', value: 3 }
+  ]},
+
+  // D8 伤官能量 - 价值观
+  { id: 'q53', dim: 'D8', text: '你觉得"听话"是褒义还是贬义？', options: [
+    { label: '褒义，顺从是美德', value: 1 },
+    { label: '中性', value: 2 },
+    { label: '贬义，没有主见', value: 3 }
+  ]},
+
+  // D9 比肩能量 - 价值观
+  { id: 'q54', dim: 'D9', text: '你觉得"合群"重要吗？', options: [
+    { label: '重要，人是社会性动物', value: 1 },
+    { label: '看情况', value: 2 },
+    { label: '不重要，做自己就好', value: 3 }
+  ]},
+
+  // D10 金气 - 价值观
+  { id: 'q55', dim: 'D10', text: '你觉得"果断"和"冲动"的区别是？', options: [
+    { label: '结果好就是果断，结果差就是冲动', value: 1 },
+    { label: '想清楚了再做是果断', value: 2 },
+    { label: '我不管，干就完了', value: 3 }
+  ]},
+
+  // D11 木气 - 价值观
+  { id: 'q56', dim: 'D11', text: '你觉得"成长"最重要的是？', options: [
+    { label: '赚钱', value: 1 },
+    { label: '学技能', value: 2 },
+    { label: '认识自己', value: 3 }
+  ]},
+
+  // D12 水气 - 价值观
+  { id: 'q57', dim: 'D12', text: '你觉得"情商"重要还是"智商"重要？', options: [
+    { label: '智商，能力说话', value: 1 },
+    { label: '都重要', value: 2 },
+    { label: '情商，会做人比会做事重要', value: 3 }
+  ]},
+
+  // D13 火气 - 价值观
+  { id: 'q58', dim: 'D13', text: '你觉得"热情"能持续多久？', options: [
+    { label: '三分钟', value: 1 },
+    { label: '看事情', value: 2 },
+    { label: '只要我想，可以一直保持', value: 3 }
+  ]},
+
+  // D14 土气 - 价值观
+  { id: 'q59', dim: 'D14', text: '你觉得"坚持"和"放弃"哪个更需要勇气？', options: [
+    { label: '放弃，及时止损', value: 1 },
+    { label: '看情况', value: 2 },
+    { label: '坚持，持之以恒', value: 3 }
+  ]},
+
+  // D15 宿命感 - 价值观
+  { id: 'q60', dim: 'D15', text: '你相信"命中注定"吗？', options: [
+    { label: '不信，我命由我不由天', value: 1 },
+    { label: '半信半疑，玄学参考一下', value: 2 },
+    { label: '信！遇到的都是命里该有的', value: 3 }
+  ]},
+
+  // ═══════════════════════════════════════
+  // 扩充题目 - 选择困境类
+  // ═══════════════════════════════════════
+
+  // D1 官星感应 - 选择困境
+  { id: 'q61', dim: 'D1', text: '月薪翻倍但996 vs 现状躺平，你选？', options: [
+    { label: '躺平，生活质量更重要', value: 1 },
+    { label: '看情况，看能翻多少', value: 2 },
+    { label: '996，搞钱要紧', value: 3 }
+  ]},
+
+  // D2 财星感应 - 选择困境
+  { id: 'q62', dim: 'D2', text: '免费但难吃 vs 贵但好吃，你选？', options: [
+    { label: '免费的，能吃饱就行', value: 1 },
+    { label: '看饿不饿', value: 2 },
+    { label: '贵但好吃，亏待什么不能亏待胃', value: 3 }
+  ]},
+
+  // D3 印星感应 - 选择困境
+  { id: 'q63', dim: 'D3', text: '读一本厚书 vs 刷一天短视频，你选？', options: [
+    { label: '刷视频，轻松快乐', value: 1 },
+    { label: '看情况', value: 2 },
+    { label: '读书，知识更持久', value: 3 }
+  ]},
+
+  // D4 桃花感应 - 选择困境
+  { id: 'q64', dim: 'D4', text: '被很多人喜欢 vs 被一个人深深爱着，你选？', options: [
+    { label: '被一个人深深爱着', value: 1 },
+    { label: '都想要', value: 2 },
+    { label: '被很多人喜欢', value: 3 }
+  ]},
+
+  // D5 驿马感应 - 选择困境
+  { id: 'q65', dim: 'D5', text: '在家躺平 vs 出去浪，你选？', options: [
+    { label: '在家躺平，舒服', value: 1 },
+    { label: '看心情', value: 2 },
+    { label: '出去浪，世界那么大', value: 3 }
+  ]},
+
+  // D6 华盖感应 - 选择困境
+  { id: 'q66', dim: 'D6', text: '孤独但自由 vs 热闹但束缚，你选？', options: [
+    { label: '热闹但束缚，人需要社交', value: 1 },
+    { label: '看情况', value: 2 },
+    { label: '孤独但自由，独处是我的充电方式', value: 3 }
+  ]},
+
+  // D7 食神能量 - 选择困境
+  { id: 'q67', dim: 'D7', text: '好看但不好吃 vs 好吃但不好看，你选？', options: [
+    { label: '好看但不好吃，颜值即正义', value: 1 },
+    { label: '都想要', value: 2 },
+    { label: '好吃但不好吃，味道最重要', value: 3 }
+  ]},
+
+  // D8 伤官能量 - 选择困境
+  { id: 'q68', dim: 'D8', text: '说真话得罪人 vs 说假话讨好人，你选？', options: [
+    { label: '说假话，和气生财', value: 1 },
+    { label: '看情况', value: 2 },
+    { label: '说真话，爱听不听', value: 3 }
+  ]},
+
+  // D9 比肩能量 - 选择困境
+  { id: 'q69', dim: 'D9', text: '当鸡头 vs 当凤尾，你选？', options: [
+    { label: '当凤尾，跟着厉害的人学习', value: 1 },
+    { label: '看情况', value: 2 },
+    { label: '当鸡头，宁做鸡头不做凤尾', value: 3 }
+  ]},
+
+  // D10 金气 - 选择困境
+  { id: 'q70', dim: 'D10', text: '完美但拖延 vs 完成但粗糙，你选？', options: [
+    { label: '完美但拖延，宁缺毋滥', value: 1 },
+    { label: '看情况', value: 2 },
+    { label: '完成但粗糙，先完成再完美', value: 3 }
+  ]},
+
+  // D11 木气 - 选择困境
+  { id: 'q71', dim: 'D11', text: '稳定但无聊 vs 刺激但冒险，你选？', options: [
+    { label: '稳定但无聊，安稳最重要', value: 1 },
+    { label: '看情况', value: 2 },
+    { label: '刺激但冒险，人生需要冒险', value: 3 }
+  ]},
+
+  // D12 水气 - 选择困境
+  { id: 'q72', dim: 'D12', text: '被所有人喜欢 vs 被一个人真正理解，你选？', options: [
+    { label: '被所有人喜欢', value: 1 },
+    { label: '都想要', value: 2 },
+    { label: '被一个人真正理解', value: 3 }
+  ]},
+
+  // D13 火气 - 选择困境
+  { id: 'q73', dim: 'D13', text: '热情但短暂 vs 冷淡但持久，你选？', options: [
+    { label: '冷淡但持久，细水长流', value: 1 },
+    { label: '看情况', value: 2 },
+    { label: '热情但短暂，燃烧总比冰冷好', value: 3 }
+  ]},
+
+  // D14 土气 - 选择困境
+  { id: 'q74', dim: 'D14', text: '一步到位 vs 慢慢来，你选？', options: [
+    { label: '一步到位，效率优先', value: 1 },
+    { label: '看情况', value: 2 },
+    { label: '慢慢来，稳扎稳打', value: 3 }
+  ]},
+
+  // D15 宿命感 - 选择困境
+  { id: 'q75', dim: 'D15', text: '知道未来但不能改变 vs 不知道未来但可以创造，你选？', options: [
+    { label: '知道未来但不能改变，至少心里有数', value: 1 },
+    { label: '都想要', value: 2 },
+    { label: '不知道未来但可以创造，人生才有惊喜', value: 3 }
   ]}
 ];
 
 // ═══════════════════════════════════════
-// 第二阶段：针对性轮 (50题，按方向分组)
-// 每个方向 8-9 题，引擎按方向优先选15题
+// 第二阶段：针对性轮 (60题，按方向分组)
+// 每个方向 10 题，引擎按方向优先选15题
 // ═══════════════════════════════════════
 const TARGETED_QUESTIONS = {
   // ── 帝王/将军/事业方向 ──
@@ -413,7 +814,7 @@ const TARGETED_QUESTIONS = {
 };
 
 // ═══════════════════════════════════════
-// 第三阶段：决胜轮 (30题，针对模糊维度)
+// 第三阶段：决胜轮 (45题，针对模糊维度)
 // ═══════════════════════════════════════
 const TIEBREAKER_QUESTIONS = [
   { id: 'u1', dim: 'D1', text: '你出门旅游通常会？', options: [
@@ -565,5 +966,99 @@ const TIEBREAKER_QUESTIONS = [
     { label: '不信，那是鸡汤', value: 1 },
     { label: '半信半疑', value: 2 },
     { label: '信，我经常用', value: 3 }
+  ]},
+
+  // ═══════════════════════════════════════
+  // 扩充决胜轮 - 社会现象
+  // ═══════════════════════════════════════
+
+  { id: 'u31', dim: 'D1', text: '你在团队中通常是什么角色？', options: [
+    { label: '执行者，做好自己的事', value: 1 },
+    { label: '协调者，帮助大家沟通', value: 2 },
+    { label: '领导者，把控全局', value: 3 }
+  ]},
+
+  { id: 'u32', dim: 'D2', text: '你对"搞钱"的态度是？', options: [
+    { label: '够用就行，不想太累', value: 1 },
+    { label: '有机会就抓住', value: 2 },
+    { label: '不惜一切代价搞钱', value: 3 }
+  ]},
+
+  { id: 'u33', dim: 'D3', text: '你对"信息茧房"的态度是？', options: [
+    { label: '不知道是什么', value: 1 },
+    { label: '听说过，可能有点', value: 2 },
+    { label: '很警惕，会主动打破', value: 3 }
+  ]},
+
+  { id: 'u34', dim: 'D4', text: '你觉得"社恐"是真的还是装的？', options: [
+    { label: '大部分是装的', value: 1 },
+    { label: '有些是真的', value: 2 },
+    { label: '真的，我就是', value: 3 }
+  ]},
+
+  { id: 'u35', dim: 'D5', text: '你对"gap year"的态度是？', options: [
+    { label: '浪费时间，简历不好看', value: 1 },
+    { label: '有条件的话可以', value: 2 },
+    { label: '人生必须有一次', value: 3 }
+  ]},
+
+  { id: 'u36', dim: 'D6', text: '你对"冥想"的态度是？', options: [
+    { label: '没试过，感觉很玄', value: 1 },
+    { label: '试过，但坐不住', value: 2 },
+    { label: '每天都在做', value: 3 }
+  ]},
+
+  { id: 'u37', dim: 'D7', text: '你对"美食探店"的态度是？', options: [
+    { label: '不去，都是营销', value: 1 },
+    { label: '偶尔去', value: 2 },
+    { label: '每家新开的都要去', value: 3 }
+  ]},
+
+  { id: 'u38', dim: 'D8', text: '你对"杠精"的态度是？', options: [
+    { label: '烦死了，别来烦我', value: 1 },
+    { label: '看情况', value: 2 },
+    { label: '我就是杠精本精', value: 3 }
+  ]},
+
+  { id: 'u39', dim: 'D9', text: '你对"独处"的态度是？', options: [
+    { label: '受不了，太无聊了', value: 1 },
+    { label: '偶尔可以', value: 2 },
+    { label: '享受，一个人很舒服', value: 3 }
+  ]},
+
+  { id: 'u40', dim: 'D10', text: '你对"执行力"的态度是？', options: [
+    { label: '想太多，做太少', value: 1 },
+    { label: '还可以', value: 2 },
+    { label: '想到就做，绝不拖延', value: 3 }
+  ]},
+
+  { id: 'u41', dim: 'D11', text: '你对"终身学习"的态度是？', options: [
+    { label: '太累了，不想学', value: 1 },
+    { label: '认同，但很难坚持', value: 2 },
+    { label: '一直在学，停不下来', value: 3 }
+  ]},
+
+  { id: 'u42', dim: 'D12', text: '你对"情绪价值"的态度是？', options: [
+    { label: '不重要，实力说话', value: 1 },
+    { label: '有点重要', value: 2 },
+    { label: '非常重要，情绪稳定最重要', value: 3 }
+  ]},
+
+  { id: 'u43', dim: 'D13', text: '你对"社交货币"的态度是？', options: [
+    { label: '不知道是什么', value: 1 },
+    { label: '听说过', value: 2 },
+    { label: '很懂，会经营', value: 3 }
+  ]},
+
+  { id: 'u44', dim: 'D14', text: '你对"延迟满足"的态度是？', options: [
+    { label: '及时行乐，活在当下', value: 1 },
+    { label: '看情况', value: 2 },
+    { label: '能忍，为了更大的回报', value: 3 }
+  ]},
+
+  { id: 'u45', dim: 'D15', text: '你对"命运"的态度是？', options: [
+    { label: '不信，我命由我不由天', value: 1 },
+    { label: '半信半疑', value: 2 },
+    { label: '信，该来的总会来', value: 3 }
   ]}
 ];
