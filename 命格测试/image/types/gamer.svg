@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 700" role="img" aria-label="GAMER archetype artwork">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fbfff9"/><stop offset=".55" stop-color="#6f8cda" stop-opacity=".28"/><stop offset="1" stop-color="#79c792" stop-opacity=".32"/>
+    </linearGradient>
+    <linearGradient id="shirt" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6f8cda"/><stop offset="1" stop-color="#79c792"/>
+    </linearGradient>
+    <linearGradient id="prop" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff7dc"/><stop offset=".45" stop-color="#6f8cda"/><stop offset="1" stop-color="#79c792"/>
+    </linearGradient>
+    <filter id="shadow"><feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#26352b" flood-opacity=".18"/></filter>
+  </defs>
+  <rect width="700" height="700" rx="48" fill="url(#bg)"/>
+  <g opacity=".22" stroke="#4d6a53" stroke-width="2" fill="none">
+    <circle cx="350" cy="350" r="260"/><circle cx="350" cy="350" r="188"/><circle cx="350" cy="350" r="116"/>
+    <path d="M350 72v556M72 350h556M154 154l392 392M546 154L154 546"/>
+  </g>
+  <g opacity=".52" fill="#fff"><circle cx="106" cy="132" r="7"/><circle cx="610" cy="126" r="9"/><circle cx="594" cy="564" r="7"/><circle cx="134" cy="552" r="10"/></g>
+  <g filter="url(#shadow)">
+    <ellipse cx="308" cy="615" rx="168" ry="28" fill="#26352b" opacity=".13"/>
+    <path d="M230 366c-64 34-112 94-132 178" stroke="#2c352f" stroke-width="18" stroke-linecap="round" fill="none"/>
+    <path d="M382 366c64 34 112 94 132 178" stroke="#2c352f" stroke-width="18" stroke-linecap="round" fill="none"/>
+    <path d="M196 622c14-120 62-216 110-216s96 96 110 216z" fill="url(#shirt)" stroke="#2c352f" stroke-width="9" stroke-linejoin="round"/>
+    <circle cx="306" cy="258" r="112" fill="#ffd8b5" stroke="#2c352f" stroke-width="9"/>
+    <path d="M202 246c20-112 88-158 166-134 52 16 82 58 104 118-66-38-132-36-210-8-28 10-48 16-60 24z" fill="#2f2d35" stroke="#2c352f" stroke-width="8" stroke-linejoin="round"/>
+    <circle cx="268" cy="270" r="10" fill="#2c352f"/><circle cx="354" cy="270" r="10" fill="#2c352f"/>
+    <path d="M276 326c30 24 66 24 96 0" stroke="#2c352f" stroke-width="9" stroke-linecap="round" fill="none"/>
+    <path d="M196 404c42 46 102 70 180 0" stroke="#fff" stroke-width="13" stroke-linecap="round" opacity=".38"/>
+    <path fill="url(#prop)" stroke="#2c352f" stroke-width="7" stroke-linejoin="round" d="M372 218c12-60 42-84 84-66h70c42-18 72 6 84 66l14 78c8 38-32 62-58 32l-42-44h-86l-42 44c-26 30-66 6-58-32z"/><path stroke="#2c352f" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M414 232h58M443 204v58M542 224h0M582 270h0"/>
+  </g>
+  <path d="M76 612c112-42 224-42 336 0 72 26 136 24 212-8" stroke="#fff" stroke-width="18" stroke-linecap="round" opacity=".26" fill="none"/>
+</svg>

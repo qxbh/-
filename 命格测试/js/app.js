@@ -42,11 +42,22 @@
   let wasComplete = false;
   let totalAnswered = 0;
 
-  const TOTAL_ALL = 35;
+  const TOTAL_ALL = 55;
 
   // ═══════════════════════════════════════
   // 工具函数
   // ═══════════════════════════════════════
+  function getTypeArtSrc(type) {
+    return `image/types/${type.code.toLowerCase()}.png`;
+  }
+
+  function getTypeDisplayName(type) {
+    return `${type.classic || type.cn}（${type.classicNote || type.cn}）`;
+  }
+
+  function getTypeShortName(type) {
+    return type.classic || type.cn;
+  }
   function shuffle(arr) {
     const a = [...arr];
     for (let i = a.length - 1; i > 0; i--) {
@@ -205,16 +216,31 @@
     const percent = Math.round((totalAnswered / TOTAL_ALL) * 100);
 
     progressBar.style.width = `${percent}%`;
-    progressText.textContent = `${totalAnswered} / ${TOTAL_ALL}`;
+
+    // 动态玄学进度状态
+    let spiritualStatus = '凡尘启步，命途初显';
+    if (percent > 20 && percent <= 40) {
+      spiritualStatus = '半生奔波，因果渐明';
+    } else if (percent > 40 && percent <= 60) {
+      spiritualStatus = '风雷激荡，格局演化';
+    } else if (percent > 60 && percent <= 80) {
+      spiritualStatus = '命盘推演，吉凶渐近';
+    } else if (percent > 80 && percent < 100) {
+      spiritualStatus = '尘世历练，只待功成';
+    } else if (percent === 100) {
+      spiritualStatus = '因果圆满，天命已定';
+    }
+
+    progressText.textContent = `${totalAnswered} / ${TOTAL_ALL} (已推演 ${percent}% · ${spiritualStatus})`;
 
     const allDone = totalAnswered >= TOTAL_ALL;
     btnSubmit.disabled = !allDone;
 
     if (testHint) {
       if (allDone) {
-        testHint.textContent = '全部答完了！直接提交看结果。';
+        testHint.textContent = '天机已泄，因果已全。速速排盘，详批命格。';
       } else {
-        testHint.textContent = '选完自动下一题，马上出结果！';
+        testHint.textContent = '浮生百态，正在排盘…… 答完见分晓。';
       }
     }
 
@@ -412,26 +438,32 @@
   function buildWeakness(result) {
     const d = result.levels;
     const weaknesses = [];
-    if (d.D1 === 'L') weaknesses.push('气场偏弱，在KTV里你是永远抢不到麦的那个');
-    if (d.D2 === 'L') weaknesses.push('对钱不太敏感，你的支付宝年度账单是你不敢看的东西');
-    if (d.D3 === 'L') weaknesses.push('学习动力不足，你的收藏夹就是你的学习计划——永远不会执行的那种');
-    if (d.D4 === 'L') weaknesses.push('社交圈偏小，你的好友列表里一半是外卖小哥和快递员');
-    if (d.D5 === 'L') weaknesses.push('太宅了，你的运动量最大的一天是双十一抢购');
-    if (d.D6 === 'L') weaknesses.push('太接地气了，你的浪漫就是"今晚吃什么"');
-    if (d.D7 === 'L') weaknesses.push('表达欲偏低，你的朋友圈上一条动态还是去年的');
-    if (d.D8 === 'L') weaknesses.push('太守规矩了，老师说往东你绝不往西——虽然老师可能说错了');
-    if (d.D9 === 'L') weaknesses.push('太依赖团队了，你连点外卖都要问室友吃什么');
-    if (d.D10 === 'L') weaknesses.push('决断力偏弱，你点外卖能纠结半小时——然后点了跟上次一样的');
-    if (d.D11 === 'L') weaknesses.push('好奇心偏低，你的手机首页三年没换过');
-    if (d.D12 === 'L') weaknesses.push('太直白了，你的心事全写在脸上，连你家猫都知道你在生气');
-    if (d.D13 === 'L') weaknesses.push('热情偏低，你收到礼物的第一反应是"哦"');
-    if (d.D14 === 'L') weaknesses.push('稳定性不足，你的计划表换得比手机壳还勤');
-    if (d.D15 === 'L') weaknesses.push('对命运不太敏感，你的人生信条是"走一步看一步"');
+    
+    if (d.D1 === 'L') weaknesses.push("【气场虚化】不争不抢是你的温柔，但偶尔也要支棱起来拿个主意，别总是被别人的意见裹挟着往前走");
+    if (d.D2 === 'L') weaknesses.push("【行动滞缓】严重的启动困难户，别等万事俱备，先迈出第一步，动起来剩下的路自己会显现");
+    if (d.D3 === 'L') weaknesses.push("【事业无欲】摸鱼虽然快乐，但也要想好退路，建议找一个能激发兴趣的副业，别让生活一眼望得到头");
+    if (d.D4 === 'L') weaknesses.push("【财帛虚耗】对金钱概念有些模糊，小心账单里的隐形黑洞，尝试记账与强迫理财才能锁住财运");
+    if (d.D5 === 'L') weaknesses.push("【文昌偷闲】不爱深思容易吃信息差的亏，试着对感兴趣的事多刨根问底，会发现完全不同的门道");
+    if (d.D6 === 'L') weaknesses.push("【孤僻寡言】心里有戏却不爱说，容易被误解为高冷或没想法，试着多表达一点你的日常与态度");
+    if (d.D7 === 'L') weaknesses.push("【情丝防御】防御拉满、怕受伤而不敢交心，其实真正的勇敢是明知会受伤依然敢付出真心");
+    if (d.D8 === 'L') weaknesses.push("【信任缺失】习惯性疑心和预设坏结果，容易把人推远，试着放下脑补，有疑问直接去坦诚沟通");
+    if (d.D9 === 'L') weaknesses.push("【变动恐惧】太安于现状导致生活容易沦为死水，试着换个路线下班或周末去个陌生地方吹吹风");
+    if (d.D10 === 'L') weaknesses.push("【慧根沉寂】太接地气容易被琐碎生活消耗，抽空读读玄学、宇宙或历史，给紧绷的灵魂透透气");
+    
+    // 对于性格部分，如果是负向/过高维度，也属于困局
+    if (d.D11 === 'H') weaknesses.push("【孤辰自责】太容易被别人的优秀刺痛而否定自己，别拿别人的剧本审判自己，你才是你的主角");
+    if (d.D12 === 'H') weaknesses.push("【内耗空转】白天装无所谓，晚上内心碎了一地，在内耗开始时强行对自己喊停，事情没那么糟");
+    if (d.D13 === 'H') weaknesses.push("【咸鱼过载】安逸过头容易退化，适当给自己设置点有难度的挑战，别让‘懒’成了逃避的借口");
+    if (d.D14 === 'H') weaknesses.push("【反骨伤人】浑身是刺、为了反对而反对，叛逆虽爽，但别把真正想帮你的好人也当体制去对抗");
+    if (d.D15 === 'H') weaknesses.push("【边界森严】防备心过强、活成了一座孤岛，学着偶尔接受无条件的善意，世界没那么多骗局");
+    if (d.D16 === 'L') weaknesses.push("【执念完美】死磕细节导致永远交不了卷，记住‘完成比完美更重要’，先交上去再迭代");
 
     if (weaknesses.length === 0) {
-      return '你几乎没有弱点，但建议偶尔示弱，让别人也有保护你的机会——毕竟你太强了，别人会自卑的。';
+      return "你的命盘极其协调，几乎没有明显的困局。如果非要找个破局点，那就是：偶尔跳出舒适圈，去经历一些不确定性，毕竟太顺遂的人生也会少了一些起伏的精彩。";
     }
-    return weaknesses.slice(0, 3).join('；') + '。不过弱点也是特点，接纳它就好——毕竟没有弱点的人生多无聊啊。';
+    
+    // 随机或者按顺序选择最多3个困局展示
+    return weaknesses.slice(0, 3).join('；') + '。';
   }
 
   // ═══════════════════════════════════════
@@ -440,11 +472,41 @@
   function buildWuxingAnalysis(result) {
     const d = result.levels;
     const wuxingMap = {
-      'D10': { element: '金', name: '金', icon: '⚔️', trait: '决断', desc: '刚毅果断，说一不二' },
-      'D11': { element: '木', name: '木', icon: '🌳', trait: '生长', desc: '生机勃勃，向上生长' },
-      'D12': { element: '水', name: '水', icon: '💧', trait: '智慧', desc: '灵动变通，深不可测' },
-      'D13': { element: '火', name: '火', icon: '🔥', trait: '热情', desc: '热情似火，感染力强' },
-      'D14': { element: '土', name: '土', icon: '⛰️', trait: '稳定', desc: '稳重踏实，包容万物' }
+      'D2': { element: '金', name: '金', icon: '⚔️', trait: '行动力',
+              descMap: {
+                H: '金气过盛！做事刚毅果断，执行力堪比泥石流，能动口绝不废话，但容易因为太刚而误伤友军。',
+                M: '金气适中。该出手时绝不含糊，做事干净利落，在做事的分寸与骨气中平衡得刚刚好。',
+                L: '金气严重不足。严重的拖延症晚期，做个决定能纠结到地老天荒，启动速度比老头乐还慢。'
+              }
+            },
+      'D3': { element: '木', name: '木', icon: '🌳', trait: '事业目标',
+              descMap: {
+                H: '木气参天！事业野心爆棚，满脑子都是搞钱和上岸，野心大到连路过的狗都要被你安排分工。',
+                M: '木气适中。有明确的目标感，同时也懂得劳逸结合，在卷与不卷之间找到了完美的平衡点。',
+                L: '木气微弱。纯纯的摸鱼艺术家，脑子里只有怎么合法偷懒，工作只是你维持生命体征的手段。'
+              }
+            },
+      'D5': { element: '水', name: '水', icon: '💧', trait: '思考深度',
+              descMap: {
+                H: '水汪汪的智商过载！脑子里想的东西比太平洋还深，逻辑细节控，但想太多在深夜极其容易破防。',
+                M: '水气清澈。看问题通透，爱思考但不会钻牛角尖，看懂了人情世故也懒得去拆穿，智商在线。',
+                L: '水气彻底干涸。懒得动脑子，大白话就是“脑干缺失的美”，遇到复杂问题直接摆烂，倒也清闲。'
+              }
+            },
+      'D6': { element: '火', name: '火', icon: '🔥', trait: '表达欲',
+              descMap: {
+                H: '烈火点燃！表达欲和分享欲溢出屏幕，朋友圈日更狂魔，只要你不尴尬，尴尬的就是别人。',
+                M: '火候刚好。谈吐得体，既能热情地输出观点，也能安静地当个倾听者，分寸感拿捏得极佳。',
+                L: '火星微弱。极度高冷，懒得表达也懒得废话，朋友圈上一条可能是去年的，活得像个隐形人。'
+              }
+            },
+      'D13': { element: '土', name: '土', icon: '⛰️', trait: '福德安逸',
+              descMap: {
+                H: '大地之土极其厚重！咸鱼之王，躺平界骨干，只要躺下就仿佛跟引力融为一体，能省电绝不发光。',
+                M: '土气踏实。注重生活品质，该享受享受，该工作工作，是个靠谱实在的俗世乐天派。',
+                L: '土气稀薄。闲不住的劳碌命，不折腾点事就浑身难受，即使放假也排满行程，容易慢性焦虑。'
+              }
+            }
     };
 
     // 计算五行得分
@@ -455,7 +517,7 @@
     }
 
     // 找出最强的五行
-    let maxDim = 'D10';
+    let maxDim = 'D2';
     let maxScore = 0;
     for (const [dim, score] of Object.entries(scores)) {
       if (score > maxScore) {
@@ -467,6 +529,7 @@
     const dominant = wuxingMap[maxDim];
     const level = d[maxDim];
     const levelText = level === 'H' ? '极强' : level === 'M' ? '中等' : '偏弱';
+    const desc = dominant.descMap[level];
 
     // 生成五行平衡描述
     const allElements = Object.entries(scores)
@@ -475,13 +538,19 @@
 
     let balanceDesc = '';
     if (allElements[0] === allElements[1]) {
-      balanceDesc = `你主修${allElements[0]}，兼修${allElements[1]}，双属性加持`;
+      balanceDesc = `你主落${allElements[0]}，兼有${allElements[1]}之气，双行加持。`;
     } else {
-      balanceDesc = `你主修${allElements[0]}，${allElements[1]}为辅`;
+      balanceDesc = `你主落${allElements[0]}，以${allElements[1]}气为辅，盘口错落。`;
     }
 
     return {
-      dominant: dominant,
+      dominant: {
+        element: dominant.element,
+        name: dominant.name,
+        icon: dominant.icon,
+        trait: dominant.trait,
+        desc: desc
+      },
       level: levelText,
       balanceDesc: balanceDesc,
       scores: scores,
@@ -496,53 +565,149 @@
     const type = result.finalType;
     const d = result.levels;
     const wuxingAnalysis = buildWuxingAnalysis(result);
+    const highDims = Object.values(d).filter(level => level === 'H').length;
+    const lowDims = Object.values(d).filter(level => level === 'L').length;
+
+    const verdictOpeners = {
+      EMPR: '你不是来参加人生的，你是来主持人生的。',
+      GENERAL: '你的人生信号灯只有绿灯，偶尔刹车全靠别人尖叫。',
+      CAREER: '你的命盘像一份自动续费的待办清单，忙，但确实能成事。',
+      SCHOLAR: '你脑子里常年开着图书馆，只是门口没有营业时间。',
+      FAME: '你自带舞台追光，沉默三分钟都会有人问是不是要发大招。',
+      WANDERER: '你的人生像未保存的行程表，下一站永远比原地更有吸引力。',
+      REBEL: '你不是故意唱反调，你只是天生听得见规则里的漏洞。',
+      CHARM: '你的人际磁场很会营业，连沉默都像在释放信号。',
+      MERCHANT: '你的灵魂装着算盘，浪漫也要先看回报率。',
+      FORTUNE: '你像被好运悄悄加过好友，关键时刻总有人递台阶。',
+      LUCKY: '你不是锦鲤体质，你是事情快坏掉时忽然会自动修复的那种。',
+      SAGE: '你的直觉像夜间雷达，嘴上说随便，心里已经算完三轮。',
+      MYSTIC: '你的命盘主打一个难以归档，越解释越像加密文件。',
+      HERMIT: '你的能量不靠热闹充电，安静才是你的主场灯。',
+      SPIRIT: '你的灵魂经常提前下班，留下身体在人间处理琐事。',
+      PROTECTOR: '你不是软，你是把锋芒都留给真正需要守住的东西。',
+      LONER: '你的人生不是缺少观众，是你不想把后台开放参观。',
+      HARD: '你是困难模式开局，但经验条涨得比别人快。',
+      CLOWN: '你把尴尬炼成笑点，把认真藏在笑声后面。',
+      FOODIE: '你的幸福感很务实，入口即化的东西最懂你。',
+      LAZY: '你不是没有野心，只是系统默认先省电再发力。',
+      GAMER: '你的脑子自带任务栏，现实只是画质比较高的一局。',
+      ROMANTIC: '你的心动系统过于灵敏，风吹一下都能写成剧情。',
+      NERD: '你对世界的爱，主要表现为想把它拆开研究明白。',
+      BOSS: '你的命盘不太服从雇佣关系，脑内每天都有新项目立项。',
+      ORDINARY: '你的普通不是空白，是不急着向世界交代自己。'
+    };
+
+    const observerOpeners = {
+      EMPR: '从第三视角看，此人不是在生活，是在巡视自己的版图。',
+      GENERAL: '从第三视角看，此人像把人生当闯关游戏，门还没开就已经冲了。',
+      CAREER: '从第三视角看，此人最像一个会自己更新的工作流，连休息都想写进待办。',
+      SCHOLAR: '从第三视角看，此人脑内常驻弹幕是“这个概念我再展开一下”。',
+      FAME: '从第三视角看，此人的人生自带补光灯，路过都像在录制花絮。',
+      WANDERER: '从第三视角看，此人像一张还没买票就想好的远方地图。',
+      REBEL: '从第三视角看，此人不是有反骨，是骨架本身就按自定义模式长的。',
+      CHARM: '从第三视角看，此人像一个行走的暧昧触发器，自己还装不知道。',
+      MERCHANT: '从第三视角看，此人的灵魂深处有个小账本，连心动都要算性价比。',
+      FORTUNE: '从第三视角看，此人像好运的亲戚，办事经常莫名又有人开门。',
+      LUCKY: '从第三视角看，此人最大的玄学是：事情快坏时总能突然没坏。',
+      SAGE: '从第三视角看，此人像半夜三点的占卜师，准是准，就是有点饿。',
+      MYSTIC: '从第三视角看，此人像加密人格包，越解读越发现还有隐藏文件。',
+      HERMIT: '从第三视角看，此人不是离群，是给社交开了严格省电模式。',
+      SPIRIT: '从第三视角看，此人身体在人间打卡，灵魂已经提前去开悟了。',
+      PROTECTOR: '从第三视角看，此人像人形安全屋，平时温和，护短时很有压迫感。',
+      LONER: '从第三视角看，此人的独处不是冷清，是私人服务器不对外开放。',
+      HARD: '从第三视角看，此人像困难模式存档，但经验值确实涨得很猛。',
+      CLOWN: '从第三视角看，此人负责把场子救活，也负责把自己藏进笑话里。',
+      FOODIE: '从第三视角看，此人的人生导航不是北斗，是“附近有什么好吃的”。',
+      LAZY: '从第三视角看，此人不是废，是把能量管理做到了玄学级别。',
+      GAMER: '从第三视角看，此人的现实生活像一局画质很高但队友一般的游戏。',
+      ROMANTIC: '从第三视角看，此人像恋爱剧编剧，风吹一下都能剪出预告片。',
+      NERD: '从第三视角看，此人对世界的爱，主要体现为想把它拆开看看。',
+      BOSS: '从第三视角看，此人脑内每天开晨会，主题是“这个项目能不能做大”。',
+      ORDINARY: '从传统视角看，此人最厉害的是不用特殊人设，也能稳定存在。'
+    };
+
+    const energyTone = highDims >= 8
+      ? '高能外放型'
+      : highDims >= 5
+        ? '重点突破型'
+        : lowDims >= 7
+          ? '低耗蓄力型'
+          : '均衡慢热型';
 
     // 性格特点总结
     const personalityTraits = [];
-    if (d.D1 === 'H') personalityTraits.push('天生的领导者');
-    if (d.D1 === 'L') personalityTraits.push('低调的幕后英雄');
-    if (d.D2 === 'H') personalityTraits.push('商业嗅觉敏锐');
-    if (d.D3 === 'H') personalityTraits.push('求知欲旺盛');
-    if (d.D4 === 'H') personalityTraits.push('魅力四射');
-    if (d.D5 === 'H') personalityTraits.push('自由的灵魂');
-    if (d.D6 === 'H') personalityTraits.push('神秘的思想家');
-    if (d.D7 === 'H') personalityTraits.push('社交达人');
-    if (d.D8 === 'H') personalityTraits.push('叛逆的创新者');
-    if (d.D9 === 'H') personalityTraits.push('独立的个体');
-    if (d.D10 === 'H') personalityTraits.push('果断的执行者');
-    if (d.D11 === 'H') personalityTraits.push('成长型选手');
-    if (d.D12 === 'H') personalityTraits.push('深沉的智者');
-    if (d.D13 === 'H') personalityTraits.push('热情的感染力');
-    if (d.D14 === 'H') personalityTraits.push('稳重的磐石');
-    if (d.D15 === 'H') personalityTraits.push('天命感应者');
+    if (d.D1 === 'H') personalityTraits.push('掌控局势的带头人');
+    if (d.D1 === 'L') personalityTraits.push('随和不争权');
+    if (d.D2 === 'H') personalityTraits.push('雷厉风行行动派');
+    if (d.D3 === 'H') personalityTraits.push('事业目标明确');
+    if (d.D4 === 'H') personalityTraits.push('金钱嗅觉灵敏');
+    if (d.D5 === 'H') personalityTraits.push('文昌护体好钻研');
+    if (d.D6 === 'H') personalityTraits.push('表达欲旺盛');
+    if (d.D7 === 'H') personalityTraits.push('重情重义易上头');
+    if (d.D8 === 'L') personalityTraits.push('心思缜密防备心重');
+    if (d.D9 === 'H') personalityTraits.push('热爱自由的旅人');
+    if (d.D10 === 'H') personalityTraits.push('直觉极准的灵性脑');
+    if (d.D11 === 'H') personalityTraits.push('心思细腻敏感');
+    if (d.D12 === 'H') personalityTraits.push('容易情绪内耗');
+    if (d.D13 === 'H') personalityTraits.push('天生懂得享受生活');
+    if (d.D14 === 'H') personalityTraits.push('破军入骨一身反骨');
+    if (d.D15 === 'H') personalityTraits.push('社交边界感清晰');
+    if (d.D16 === 'L') personalityTraits.push('死磕完美的细节控');
 
     const traitText = personalityTraits.length > 0
-      ? personalityTraits.slice(0, 3).join('、')
-      : '均衡发展';
+      ? personalityTraits.slice(0, 4).join('、')
+      : '均衡发展，没有哪一项特别抢戏，但也不容易翻车';
 
     // 运势分析
     let fortuneText = '';
-    if (d.D4 === 'H') fortuneText += '桃花旺盛，异性缘爆棚。';
-    if (d.D5 === 'H') fortuneText += '驿马星动，适合变动和发展。';
-    if (d.D6 === 'H') fortuneText += '华盖照命，艺术感和直觉力强。';
-    if (!fortuneText) fortuneText = '命盘平稳，运势平稳上升。';
+    if (d.D7 === 'H') fortuneText += '红鸾星动，感情生活有新的波澜。';
+    if (d.D9 === 'H') fortuneText += '驿马临身，适合出门旅行或开拓新领域。';
+    if (d.D10 === 'H') fortuneText += '华盖照命，近期灵感与精神直觉极其敏锐。';
+    if (d.D4 === 'H') fortuneText += '禄存财星在线，有利于进行理财和资源整合。';
+    if (d.D6 === 'H') fortuneText += '火气够旺，适合进行公开输出或分享。';
+    if (!fortuneText) fortuneText = '命盘平稳，运势如细水长流，稳步上升。';
+
+    const blindSpotList = [];
+    if (d.D1 === 'H') blindSpotList.push('容易显得强势，不自觉得罪人');
+    if (d.D7 === 'H') blindSpotList.push('容易在感情里变成恋爱脑被伤害');
+    if (d.D9 === 'H') blindSpotList.push('想跑路时，先确认自己是不是在逃避问题');
+    if (d.D14 === 'H') blindSpotList.push('反骨虽好，但当心把善意也挡在门外');
+    if (d.D2 === 'L') blindSpotList.push('小心纠结太久把机会生生错过');
+    if (d.D8 === 'L') blindSpotList.push('猜疑心太重，会把身边的人推开');
+    if (d.D12 === 'H') blindSpotList.push('内耗太深，把大好精力花在自我否定上');
+    if (blindSpotList.length === 0) blindSpotList.push('最大的盲点是太安稳，容易缺乏变动的刺激感');
 
     // 建议
     const adviceList = [];
-    if (d.D10 === 'L') adviceList.push('增强决断力，相信自己的判断');
-    if (d.D11 === 'L') adviceList.push('保持好奇心，多尝试新事物');
-    if (d.D12 === 'L') adviceList.push('学会深思熟虑，不要急于表态');
-    if (d.D13 === 'L') adviceList.push('多表达自己的情感和想法');
-    if (d.D14 === 'L') adviceList.push('培养耐心，做事更稳重');
-    if (d.D1 === 'H' && d.D8 === 'H') adviceList.push('学会倾听他人意见，避免过于强势');
-    if (d.D4 === 'H') adviceList.push('桃花虽旺，但要擦亮眼睛');
-    if (d.D5 === 'H') adviceList.push('变动虽多，但要把握机会');
-    if (adviceList.length === 0) adviceList.push('保持现在的状态，继续发光发热');
+    if (d.D2 === 'L') adviceList.push('训练小决定速决，别让细节拖死项目');
+    if (d.D5 === 'L') adviceList.push('多读点书或深入钻研一个复杂命题');
+    if (d.D6 === 'L') adviceList.push('多写写日记或发个朋友圈分享当下感受');
+    if (d.D12 === 'H') adviceList.push('睡前切断胡思乱想，事情并没有你想 of 那么糟');
+    if (d.D13 === 'H') adviceList.push('给自己的小奋斗目标定制个奖赏');
+    if (d.D15 === 'L') adviceList.push('学着对陌生人保留几分警惕，别轻易交底');
+    if (adviceList.length === 0) adviceList.push('保持当前的调和状态，顺其自然即可');
+
+    const sparkActions = [];
+    if (d.D4 === 'H') sparkActions.push('理一次账，划出多余开支，别让钱白白溜走');
+    if (d.D5 === 'H') sparkActions.push('看一篇深度文章，写下三句自己的感悟');
+    if (d.D7 === 'H') sparkActions.push('主动向欣赏的人发条消息，别等对方导航');
+    if (d.D9 === 'H') sparkActions.push('去个从没去过的小街转转，呼吸新鲜空气');
+    if (d.D10 === 'H') sparkActions.push('安静打坐5分钟，听听自己声音');
+    if (d.D2 === 'L') sparkActions.push('用一分钟直接定下今天的外卖，别纠结');
+    if (d.D13 === 'H') sparkActions.push('稍微爬个楼梯动一动，别一躺就是一整天');
+    if (sparkActions.length === 0) sparkActions.push('做件一直拖延的小事，把天命行动力点燃');
 
     return {
+      observerTitle: '旁观命盘',
+      observerText: observerOpeners[type.code] || observerOpeners.ORDINARY,
+      verdict: verdictOpeners[type.code] || verdictOpeners.ORDINARY,
+      energyTone,
+      wuxingTag: `${wuxingAnalysis.dominant.icon} ${wuxingAnalysis.dominant.name}行主场 · ${wuxingAnalysis.level}`,
       traitText,
       fortuneText,
-      adviceList: adviceList.slice(0, 3)
+      blindSpotText: blindSpotList.slice(0, 2).join('；'),
+      adviceList: adviceList.slice(0, 3),
+      sparkAction: sparkActions[0]
     };
   }
 
@@ -732,9 +897,10 @@
       const summary = generateCandidateSummary(candidate, lastResult.levels);
       return `
         <div class="candidate-card" data-index="${index}">
+          <img class="candidate-art" src="${getTypeArtSrc(candidate)}" alt="${getTypeShortName(candidate)}命格图">
           <div class="candidate-header">
             <span class="candidate-rank">${index === 0 ? '🏆' : index === 1 ? '🥈' : '🥉'}</span>
-            <span class="candidate-name">${candidate.cn}</span>
+            <span class="candidate-name">${getTypeDisplayName(candidate)}</span>
             <span class="candidate-similarity">${candidate.similarity}%</span>
           </div>
           <div class="candidate-summary">
@@ -765,7 +931,7 @@
 
     // 隐藏候选选择，显示完整结果
     document.getElementById('candidateSelection').style.display = 'none';
-    document.getElementById('fullResult').style.display = 'block';
+    document.getElementById('fullResult').style.display = 'grid';
 
     // 渲染完整结果
     renderFullResult();
@@ -788,10 +954,13 @@
     const type = lastResult.finalType;
 
     document.getElementById('resultModeKicker').textContent = '你的命格是';
-    document.getElementById('resultTypeName').textContent = `${type.code}（${type.cn}）`;
-    document.getElementById('matchBadge').textContent = `匹配度 ${lastResult.similarity}% · 精准命中 ${lastResult.exactHits}/15 维`;
+    document.getElementById('resultTypeName').textContent = getTypeDisplayName(type);
+    document.getElementById('matchBadge').textContent = `匹配度 ${lastResult.similarity}% · 精准命中 ${lastResult.exactHits}/16 维`;
     document.getElementById('resultTypeSub').textContent = type.intro;
     document.getElementById('resultDesc').textContent = type.desc;
+    const resultTypeArt = document.getElementById('resultTypeArt');
+    resultTypeArt.src = getTypeArtSrc(type);
+    resultTypeArt.alt = `${getTypeShortName(type)}命格图`;
 
     document.getElementById('portraitText').textContent = buildPortrait(lastResult);
 
@@ -799,17 +968,37 @@
     const summary = buildSummary(lastResult);
     const summaryContent = document.getElementById('summaryContent');
     summaryContent.innerHTML = `
+      <div class="summary-observer">
+        <div class="summary-verdict-label">${summary.observerTitle}</div>
+        <div class="summary-observer-text">${summary.observerText}</div>
+      </div>
+      <div class="summary-verdict">
+        <div class="summary-verdict-label">一句断命</div>
+        <div class="summary-verdict-text">「${summary.verdict}」</div>
+      </div>
+      <div class="summary-chip-row">
+        <span>${summary.energyTone}</span>
+        <span>${summary.wuxingTag}</span>
+      </div>
       <div class="summary-section">
-        <div class="summary-label">🏷️ 性格关键词</div>
+        <div class="summary-label">🏷️ 命格关键词</div>
         <div class="summary-value">${summary.traitText}</div>
       </div>
       <div class="summary-section">
-        <div class="summary-label">📈 运势提示</div>
+        <div class="summary-label">📈 运势浮动</div>
         <div class="summary-value">${summary.fortuneText}</div>
       </div>
       <div class="summary-section">
-        <div class="summary-label">💡 给你的建议</div>
+        <div class="summary-label">💡 破局建议</div>
         <div class="summary-value">${summary.adviceList.join('；')}</div>
+      </div>
+      <div class="summary-section summary-section-warn">
+        <div class="summary-label">⚠️ 忌神提醒</div>
+        <div class="summary-value">${summary.blindSpotText}</div>
+      </div>
+      <div class="summary-action">
+        <div class="summary-label">今日开运</div>
+        <div class="summary-action-text">${summary.sparkAction}</div>
       </div>
     `;
 
@@ -832,23 +1021,23 @@
 
     document.getElementById('weaknessText').textContent = buildWeakness(lastResult);
 
-    // 灵魂标签
+    // 命格判词
     document.getElementById('mottoText').textContent = `「${type.motto}」`;
 
-    // 感情画像
+    // 红鸾感应
     document.getElementById('typeLikes').textContent = type.likes;
     document.getElementById('typeLikedBy').textContent = type.likedBy;
 
-    // 他们怎么看你
+    // 旁人断语
     document.getElementById('quoteEx').textContent = type.exWouldSay;
     document.getElementById('quoteMom').textContent = type.momWouldSay;
 
-    // 灵魂搭档
+    // 贵人相性
     const partnerList = document.getElementById('partnerList');
     partnerList.innerHTML = buildPartners(lastResult).map(p => `
       <div class="partner-item">
-        <span class="partner-code">${p.code}</span>
-        <span class="partner-name">${p.cn}</span>
+        <span class="partner-code">${getTypeShortName(p)}</span>
+        <span class="partner-name">${p.classicNote || p.cn}</span>
         <span class="partner-intro">${p.intro}</span>
       </div>
     `).join('');
@@ -860,9 +1049,9 @@
       <div class="wuxing-dominant">
         <div class="wuxing-dominant-icon">${wuxingAnalysis.dominant.icon}</div>
         <div class="wuxing-dominant-info">
-          <div class="wuxing-dominant-title">你的主属性：${wuxingAnalysis.dominant.name}</div>
+          <div class="wuxing-dominant-title">主行落点：${wuxingAnalysis.dominant.name}</div>
           <div class="wuxing-dominant-desc">${wuxingAnalysis.dominant.desc}</div>
-          <div class="wuxing-dominant-level">强度：${wuxingAnalysis.level}</div>
+          <div class="wuxing-dominant-level">气势：${wuxingAnalysis.level}</div>
         </div>
       </div>
       <div class="wuxing-balance">${wuxingAnalysis.balanceDesc}</div>
@@ -881,12 +1070,43 @@
     }).join('');
 
     const shenshaList = document.getElementById('shenshaList');
+    const shenshaDescMap = {
+      '红鸾': {
+        '动情': '桃花主动导航找你，哪怕足不出户，也有人想方设法逗你开心，桃花运强劲。',
+        '有缘': '异性缘分与人际口碑极佳，适合广结善缘，谈笑风生间便能让人心生好感。'
+      },
+      '驿马': {
+        '奔波': '心在远方，人总在路途。一换环境就支棱，一闲着就发霉，属于待不住的探索精神。',
+        '平稳': '求稳心态重，喜欢在一个环境里深耕与安定，偏向在熟悉的节奏中寻找安全感。'
+      },
+      '华盖': {
+        '高照': '天生自带神秘清冷感，直觉强到可怕，对神秘学、心理学与艺术感悟极深。',
+        '微隐': '精神世界自成一体，爱发呆出神，内心戏极其丰富，有自己独特的精神角落。'
+      },
+      '文昌贵人': {
+        '照命': '考神在线，脑子转得飞快。危机公关与临时抱佛脚届的绝对的神，总能逢凶化吉。'
+      },
+      '禄存财星': {
+        '入庙': '财神爷在你的小本子上悄悄点了个赞，性价比大师，总能踩准省钱与赚钱的窍门。'
+      }
+    };
     if (lastResult.shensha.length > 0) {
-      shenshaList.innerHTML = lastResult.shensha.map(s => `
-        <span class="shensha-tag">${s.name}：${s.level}</span>
-      `).join('');
+      shenshaList.innerHTML = lastResult.shensha.map(s => {
+        const desc = (shenshaDescMap[s.name] && shenshaDescMap[s.name][s.level]) || '气场充盈，带来独特的磁场感应与行运加持。';
+        return `
+          <div class="shensha-item">
+            <span class="shensha-tag">${s.name} · ${s.level}</span>
+            <span class="shensha-desc">${desc}</span>
+          </div>
+        `;
+      }).join('');
     } else {
-      shenshaList.innerHTML = '<span class="shensha-tag">命盘平稳，无明显神煞</span>';
+      shenshaList.innerHTML = `
+        <div class="shensha-item">
+          <span class="shensha-tag">平稳</span>
+          <span class="shensha-desc">命盘四平八稳，近期无明显神煞侵扰，磁场安定，适合低调发育。</span>
+        </div>
+      `;
     }
 
     const dimList = document.getElementById('dimList');
@@ -907,19 +1127,25 @@
     document.getElementById('adviceColor').textContent = type.color;
     document.getElementById('adviceAvoid').textContent = type.avoid;
 
-    const posterCanvas = XuanxuePoster.generate(lastResult);
-    const previewContainer = document.getElementById('posterPreview');
-    previewContainer.innerHTML = '';
-    posterCanvas.style.maxWidth = '100%';
-    posterCanvas.style.borderRadius = '14px';
-    previewContainer.appendChild(posterCanvas);
+    renderPosterPreview(lastResult);
 
     shareText.textContent = buildShareText(lastResult);
   }
 
-  function downloadPoster() {
+  async function renderPosterPreview(result) {
+    const previewContainer = document.getElementById('posterPreview');
+    previewContainer.innerHTML = '<div class="poster-loading">命格图正在显灵...</div>';
+    const posterCanvas = await XuanxuePoster.generate(result);
+    if (!lastResult || lastResult.finalType.code !== result.finalType.code) return;
+    previewContainer.innerHTML = '';
+    posterCanvas.style.maxWidth = '100%';
+    posterCanvas.style.borderRadius = '14px';
+    previewContainer.appendChild(posterCanvas);
+  }
+
+  async function downloadPoster() {
     if (!lastResult) return;
-    XuanxuePoster.download(lastResult);
+    await XuanxuePoster.download(lastResult);
   }
 
   init();

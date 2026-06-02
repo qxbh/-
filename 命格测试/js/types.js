@@ -14,12 +14,12 @@ const TYPE_LIBRARY = {
     avoid: '忌对服务员用帝王语气，忌在群里@全体成员，忌把朋友聚会开成工作会议',
     likes: '崇拜你但不谄媚的人，有自己的想法但关键时刻愿意配合你的人',
     likedBy: '缺乏安全感需要被引领的人，欣赏果断性格的人',
-    friends: 'PROTECTOR（守护命）给你安全感，SCHOLAR（文人命）补你的短板',
-    motto: '我说了算。',
+    friends: '天梁守命（护持型）给你安全感，文昌入命（文才型）补你的短板',
+    motto: '生来不服小局，命里自带主位。',
     exWouldSay: '跟他在一起很有安全感，但有时候太强势了',
     momWouldSay: '我儿子从小就有主见',
-    pattern: 'HHH-HMH-HHL-MHH-MHH',
-    weights: [3, 1, 1, 1, 1, 1, 1, 3, 2, 3, 1, 1, 1, 2, 1]
+    pattern: 'HMHH-HMHM-MHLH-HHHH',
+    weights: [3, 3, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 3, 2, 2]
     //        D1 D2 D3 D4 D5 D6 D7 D8 D9 D10 D11 D12 D13 D14 D15
   },
 
@@ -33,12 +33,12 @@ const TYPE_LIBRARY = {
     avoid: '忌冲动行事，忌跟外卖小哥吵架，忌把"干就完了"当人生信条',
     likes: '温柔体贴能包容你冲动的人，有耐心的人',
     likedBy: '觉得你很有安全感的人，喜欢行动派的人',
-    friends: 'CHARM（桃花命）让你学会细腻，FOODIE（食神命）带你享受生活',
-    motto: '干就完了！',
+    friends: '红鸾照命（桃花型）让你学会细腻，食神生财（口福型）带你享受生活',
+    motto: '路还没看清，人已经冲出去了。',
     exWouldSay: '跟他在一起很刺激，但有时候太冲动了',
     momWouldSay: '我儿子就是脾气急了点，人是好的',
-    pattern: 'HHL-HMH-HHH-HML-HMM',
-    weights: [3, 1, 1, 1, 2, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1]
+    pattern: 'HHMH-LHHM-MHMM-HHML',
+    weights: [3, 2, 1, 1, 1, 1, 1, 1, 2, 1, 1, 2, 1, 2, 1, 1]
   },
 
   CAREER: {
@@ -51,12 +51,12 @@ const TYPE_LIBRARY = {
     avoid: '忌把周末排满会议，忌凌晨回工作消息，忌把KPI当人生目标',
     likes: '独立有自己事业的人，不会粘着你的人',
     likedBy: '欣赏上进心的人，觉得有事业心很帅的人',
-    friends: 'SCHOLAR（文人命）帮你放松，LAZY（躺平命）教你休息',
-    motto: '等我忙完这阵就休息。',
+    friends: '文昌入命（文才型）帮你放松，养星守命（安逸型）教你休息',
+    motto: '命里不怕忙，就怕忙得没名堂。',
     exWouldSay: '他什么都好，就是没有时间',
     momWouldSay: '我儿子工作很努力，就是不找对象',
-    pattern: 'HMH-HMH-HHM-MHM-HML',
-    weights: [2, 1, 2, 1, 1, 1, 1, 2, 3, 2, 1, 1, 1, 1, 1]
+    pattern: 'HMHM-HHHM-MHMM-HHMM',
+    weights: [2, 2, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1]
   },
 
   SCHOLAR: {
@@ -69,12 +69,12 @@ const TYPE_LIBRARY = {
     avoid: '忌朋友圈发小作文，忌跟甲方解释什么是"灵感"，忌在饭局上背诗',
     likes: '能听懂你说话的人，有文化底蕴的人',
     likedBy: '觉得文艺气质很迷人的人，喜欢安静的人',
-    friends: 'EMPR（帝王命）给你方向，SPIRIT（灵性命）跟你聊哲学',
-    motto: '腹有诗书气自华。',
+    friends: '紫微入命（帝王型）给你方向，太乙照神（灵修型）跟你聊哲学',
+    motto: '脑子里有书，嘴上有刺，心里有戏。',
     exWouldSay: '他很有才华，但有时候太矫情了',
     momWouldSay: '我儿子从小就爱看书',
-    pattern: 'LML-MLM-MLM-MLL-HHH',
-    weights: [1, 1, 3, 1, 1, 3, 2, 1, 1, 1, 2, 2, 1, 1, 3]
+    pattern: 'LMLM-LHMM-LMML-MLHM',
+    weights: [1, 1, 2, 1, 3, 1, 1, 1, 1, 3, 1, 2, 2, 1, 1, 1]
   },
 
   FAME: {
@@ -87,12 +87,12 @@ const TYPE_LIBRARY = {
     avoid: '忌为了流量啥都发，忌买粉刷数据，忌把点赞数当人生价值',
     likes: '会夸你的人，能给你提供情绪价值的人',
     likedBy: '被你的热情感染的人，觉得你很有活力的人',
-    friends: 'CHARM（桃花命）跟你一起闪耀，GENERAL（将军命）给你执行力',
-    motto: '不火不是人。',
+    friends: '红鸾照命（桃花型）跟你一起闪耀，七杀坐命（将帅型）给你执行力',
+    motto: '不是你招风，是这风就爱往你身上刮。',
     exWouldSay: '他很好，但他更爱他的粉丝',
     momWouldSay: '我儿子在网上挺有名的',
-    pattern: 'HMH-MHM-HML-MHM-MML',
-    weights: [2, 1, 1, 3, 1, 1, 3, 1, 2, 1, 1, 1, 3, 1, 1]
+    pattern: 'HMHM-HMMM-HMMM-HMMM',
+    weights: [2, 1, 1, 3, 1, 3, 3, 1, 1, 1, 1, 1, 3, 1, 1, 1]
   },
 
   WANDERER: {
@@ -105,12 +105,12 @@ const TYPE_LIBRARY = {
     avoid: '忌负债旅行，忌把"说走就走"当逃避，忌在朋友圈发定位炫耀',
     likes: '同样热爱自由的人，不会束缚你的人',
     likedBy: '被你的冒险精神吸引的人，觉得你很酷的人',
-    friends: 'FOODIE（食神命）跟你一起吃遍世界，LAZY（躺平命）让你偶尔停下',
-    motto: '世界那么大，我想去看看。',
+    friends: '食神生财（口福型）跟你一起吃遍世界，养星守命（安逸型）让你偶尔停下',
+    motto: '心不在原地，命总在路上。',
     exWouldSay: '他很好，但他不属于任何人',
     momWouldSay: '我儿子又不知道跑哪去了',
-    pattern: 'LLM-MLM-LMM-MLM-HMM',
-    weights: [1, 1, 1, 1, 3, 2, 2, 1, 1, 1, 1, 2, 1, 1, 2]
+    pattern: 'LMLL-MHMM-LMMM-LMMM',
+    weights: [1, 1, 1, 1, 1, 1, 1, 1, 3, 2, 1, 2, 2, 1, 1, 1]
   },
 
   REBEL: {
@@ -123,12 +123,12 @@ const TYPE_LIBRARY = {
     avoid: '忌为了叛逆而叛逆，忌在工作群发表情包，忌把抬杠当个性',
     likes: '欣赏你独立精神的人，不会试图改变你的人',
     likedBy: '被你的独特气质吸引的人，觉得叛逆很酷的人',
-    friends: 'MYSTIC（神秘命）跟你一起探索未知，SAGE（术士命）跟你聊玄学',
-    motto: '凭什么？',
+    friends: '华盖临命（神秘型）跟你一起探索未知，天机入命（术数型）跟你聊玄学',
+    motto: '规矩是别人定的，打破规矩是我定的。',
     exWouldSay: '他很有个性，但有时候真的太倔了',
     momWouldSay: '我儿子从小就犟，跟他爸一个德行',
-    pattern: 'MLL-HHL-HHL-HHM-HLL',
-    weights: [1, 1, 1, 1, 1, 2, 1, 3, 2, 1, 1, 1, 2, 1, 1]
+    pattern: 'MHHL-LHHM-HLMM-HHLM',
+    weights: [1, 1, 1, 1, 1, 2, 1, 1, 1, 2, 1, 1, 1, 3, 1, 1]
   },
 
   CHARM: {
@@ -141,12 +141,12 @@ const TYPE_LIBRARY = {
     avoid: '忌同时暧昧五个人以上，忌已读不回，忌把暧昧当社交',
     likes: '真诚直接的人，不会玩套路的人',
     likedBy: '被你的魅力吸引的人，觉得你很有趣的人',
-    friends: 'EMPR（帝王命）给你稳定，GENERAL（将军命）保护你',
-    motto: '我不是故意的，是他们自己来的。',
+    friends: '紫微入命（帝王型）给你稳定，七杀坐命（将帅型）保护你',
+    motto: '不是你招桃花，是桃花自己会导航。',
     exWouldSay: '他很好，但追他的人太多了',
     momWouldSay: '我儿子从小就不缺人追',
-    pattern: 'MLM-HLL-MLL-MLM-MHH',
-    weights: [1, 1, 1, 3, 1, 1, 3, 1, 1, 1, 1, 1, 3, 1, 2]
+    pattern: 'MMLL-MHHM-LLMH-MLLM',
+    weights: [1, 1, 1, 1, 1, 3, 3, 1, 1, 1, 1, 2, 3, 1, 2, 1]
   },
 
   MERCHANT: {
@@ -159,12 +159,12 @@ const TYPE_LIBRARY = {
     avoid: '忌把朋友当客户，忌在饭局上谈合作，忌跟朋友算账算到小数点后两位',
     likes: '同样务实的人，不会乱花钱的人',
     likedBy: '觉得你很有经济头脑的人，需要安全感的人',
-    friends: 'GENERAL（将军命）跟你一起干事业，LUCKY（锦鲤命）带你好运',
-    motto: '这个值多少钱？',
+    friends: '七杀坐命（将帅型）跟你一起干事业，天乙贵人（好运型）带你好运',
+    motto: '算盘打得响，黄金万两，情义随缘。',
     exWouldSay: '他很会过日子，但有时候太抠了',
     momWouldSay: '我儿子从小就精，从来没亏过',
-    pattern: 'LHM-HHH-MHM-HLM-HMM',
-    weights: [1, 3, 1, 1, 1, 1, 2, 1, 2, 2, 1, 1, 1, 1, 1]
+    pattern: 'LHLH-MHHM-HHMM-MHMM',
+    weights: [1, 2, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1]
   },
 
   FORTUNE: {
@@ -177,12 +177,12 @@ const TYPE_LIBRARY = {
     avoid: '忌炫富，忌在朋友圈晒余额，忌把运气当实力',
     likes: '不因为你有钱才喜欢你的人，欣赏你内在的人',
     likedBy: '被你的气质吸引的人，觉得你很有福气的人',
-    friends: 'CHARM（桃花命）跟你一起享受生活，EMPR（帝王命）跟你一起搞事业',
-    motto: '运气也是实力的一部分。',
+    friends: '红鸾照命（桃花型）跟你一起享受生活，紫微入命（帝王型）跟你一起搞事业',
+    motto: '头顶福气包，摔倒都能捡到小钱包。',
     exWouldSay: '他运气真的好，但有时候太飘了',
     momWouldSay: '我儿子命好，从小就顺',
-    pattern: 'LHH-HHH-HMH-MML-MLL',
-    weights: [1, 3, 2, 2, 1, 1, 2, 1, 1, 1, 1, 1, 2, 1, 1]
+    pattern: 'LMMH-HMHM-HHML-HMLM',
+    weights: [1, 1, 1, 3, 2, 2, 2, 1, 1, 1, 1, 1, 2, 1, 1, 1]
   },
 
   LUCKY: {
@@ -195,12 +195,12 @@ const TYPE_LIBRARY = {
     avoid: '忌躺平不动，忌把好运当理所当然，忌在朋友圈发"今天又中奖了"',
     likes: '不嫉妒你好运的人，能跟你一起开心的人',
     likedBy: '被你的好运气感染的人，觉得你很有趣的人',
-    friends: 'EMPR（帝王命）带你飞，FORTUNE（富贵命）跟你一起享福',
-    motto: '今天又是幸运的一天。',
+    friends: '紫微入命（帝王型）带你飞，天府坐命（富贵型）跟你一起享福',
+    motto: '转发锦鲤没用，直接转你就行。',
     exWouldSay: '他运气真的好，但有时候太佛了',
     momWouldSay: '我儿子就是命好，没办法',
-    pattern: 'LML-MLL-MLL-MML-MML',
-    weights: [1, 2, 1, 1, 2, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1]
+    pattern: 'LMMM-LMMM-LLML-MLMM',
+    weights: [1, 1, 2, 2, 1, 1, 1, 1, 2, 1, 1, 2, 1, 1, 1, 1]
   },
 
   SAGE: {
@@ -213,12 +213,12 @@ const TYPE_LIBRARY = {
     avoid: '忌给自己算命，忌走火入魔，忌在饭局上给人看手相',
     likes: '同样对神秘事物感兴趣的人，能接受你"神神叨叨"的人',
     likedBy: '被你的神秘气质吸引的人，需要精神指引的人',
-    friends: 'MYSTIC（神秘命）跟你一起探索未知，HERMIT（隐士命）跟你一起修行',
-    motto: '我夜观天象……',
+    friends: '华盖临命（神秘型）跟你一起探索未知，孤辰入命（隐逸型）跟你一起修行',
+    motto: '半夜洞察天机，白天猜错外卖。',
     exWouldSay: '他很神秘，但有时候太神叨了',
     momWouldSay: '我儿子最近在研究什么塔罗牌',
-    pattern: 'LLL-MML-LML-MLL-HHH',
-    weights: [1, 1, 2, 1, 1, 3, 1, 1, 1, 1, 1, 2, 1, 1, 3]
+    pattern: 'LMLL-LHMM-MLML-LMHM',
+    weights: [1, 1, 1, 1, 2, 1, 1, 1, 1, 3, 1, 2, 1, 1, 1, 1]
   },
 
   MYSTIC: {
@@ -231,12 +231,12 @@ const TYPE_LIBRARY = {
     avoid: '忌故意装神秘，忌在深夜发哲学朋友圈，忌把"你不懂我"挂嘴边',
     likes: '能接受你所有奇怪想法的人，不会试图定义你的人',
     likedBy: '被你的神秘感吸引的人，觉得你很酷的人',
-    friends: 'REBEL（叛逆命）跟你一起打破常规，SAGE（术士命）跟你一起探索',
-    motto: '我是谁？',
+    friends: '破军入命（破局型）跟你一起打破常规，天机入命（术数型）跟你一起探索',
+    motto: '灵魂自带密码，谁也别想破解。',
     exWouldSay: '他很迷人，但我从来没真正了解过他',
     momWouldSay: '我儿子从小就不太说话，但心里有数',
-    pattern: 'LHL-LML-MLL-MLL-HHH',
-    weights: [1, 1, 2, 1, 1, 3, 1, 1, 1, 1, 1, 3, 1, 1, 3]
+    pattern: 'LMLH-LHLM-MLML-MLHM',
+    weights: [1, 1, 1, 1, 2, 1, 1, 1, 1, 3, 1, 3, 1, 1, 1, 1]
   },
 
   HERMIT: {
@@ -249,12 +249,12 @@ const TYPE_LIBRARY = {
     avoid: '忌连续三天不出门，忌拒接所有电话，忌把孤独当人设',
     likes: '同样享受独处的人，不会强迫你社交的人',
     likedBy: '被你的安静气质吸引的人，需要一个安静港湾的人',
-    friends: 'NERD（学霸命）跟你一起安静学习，SPIRIT（灵性命）跟你一起冥想',
-    motto: '别来找我。',
+    friends: '文曲入命（学识型）跟你一起安静学习，太乙照神（灵修型）跟你一起冥想',
+    motto: '社交全靠电量，能宅着绝不营业。',
     exWouldSay: '他很好，但太安静了',
     momWouldSay: '我儿子就是不爱出门，其他都好',
-    pattern: 'LLL-LML-LLL-LML-HHH',
-    weights: [1, 1, 2, 1, 1, 3, 1, 1, 1, 1, 1, 2, 1, 1, 3]
+    pattern: 'LLML-LLLL-MHHL-MLHM',
+    weights: [1, 1, 1, 1, 2, 2, 1, 2, 1, 3, 3, 2, 2, 1, 1, 1]
   },
 
   SPIRIT: {
@@ -267,12 +267,12 @@ const TYPE_LIBRARY = {
     avoid: '忌朋友圈日更三条人生感悟，忌凌晨三点冥想，忌跟所有人安利冥想',
     likes: '同样在寻找人生意义的人，能跟你深度对话的人',
     likedBy: '被你的智慧吸引的人，需要心灵治愈的人',
-    friends: 'HERMIT（隐士命）跟你一起修行，SAGE（术士命）跟你一起探索',
-    motto: '一切皆是修行。',
+    friends: '孤辰入命（隐逸型）跟你一起修行，天机入命（术数型）跟你一起探索',
+    motto: '肉身在红尘打卡，灵魂已飞向宇宙。',
     exWouldSay: '他很有深度，但有时候太出世了',
     momWouldSay: '我儿子最近在学什么冥想',
-    pattern: 'LML-LML-LLL-MLL-HHH',
-    weights: [1, 1, 2, 1, 1, 3, 1, 1, 1, 1, 2, 2, 1, 1, 3]
+    pattern: 'LMLM-LHLM-MLML-LLHM',
+    weights: [1, 1, 2, 1, 2, 1, 1, 1, 1, 3, 1, 2, 1, 1, 1, 1]
   },
 
   PROTECTOR: {
@@ -285,12 +285,12 @@ const TYPE_LIBRARY = {
     avoid: '忌把别人的事当自己的事，忌不懂拒绝，忌在深夜还在回朋友的求助消息',
     likes: '同样善良的人，懂得感恩的人',
     likedBy: '需要安全感的人，被你的温暖打动的人',
-    friends: 'EMPR（帝王命）给你方向，CHARM（桃花命）让你学会爱自己',
-    motto: '有我在，别怕。',
+    friends: '紫微入命（帝王型）给你方向，红鸾照命（桃花型）让你学会爱自己',
+    motto: '看起来温温和和，护短时比谁都狠。',
     exWouldSay: '他对我太好了，好到我忘了他也有需要',
     momWouldSay: '我儿子从小就心善',
-    pattern: 'HML-MLL-HML-MLL-HMM',
-    weights: [2, 1, 2, 1, 1, 1, 2, 1, 1, 1, 3, 1, 1, 1, 2]
+    pattern: 'HMLM-LHMM-LLML-HMMM',
+    weights: [2, 1, 3, 1, 2, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1]
   },
 
   LONER: {
@@ -303,12 +303,12 @@ const TYPE_LIBRARY = {
     avoid: '忌连续拒绝所有社交邀请，忌把孤独当人设，忌在深夜独自emo',
     likes: '尊重你独处空间的人，不会强迫你社交的人',
     likedBy: '被你的独立气质吸引的人，觉得你很酷的人',
-    friends: 'HERMIT（隐士命）跟你一起安静，NERD（学霸命）跟你一起研究',
-    motto: '一个人挺好的。',
+    friends: '孤辰入命（隐逸型）跟你一起安静，文曲入命（学识型）跟你一起研究',
+    motto: '一个人是一支军队，还特别省电。',
     exWouldSay: '他很好，但我感觉走不进他的世界',
     momWouldSay: '我儿子就是不太爱说话',
-    pattern: 'LLL-LLL-LLL-LML-HMH',
-    weights: [1, 1, 1, 1, 2, 3, 1, 1, 2, 1, 1, 2, 1, 1, 2]
+    pattern: 'LLML-LLLL-LHHL-LLMM',
+    weights: [1, 1, 1, 1, 1, 2, 1, 2, 2, 2, 3, 2, 1, 1, 1, 1]
   },
 
   HARD: {
@@ -321,12 +321,12 @@ const TYPE_LIBRARY = {
     avoid: '忌自暴自弃，忌把"我不行"挂嘴边，忌在深夜刷别人的成功故事',
     likes: '不会因为你暂时的困境而离开的人，愿意陪你一起奋斗的人',
     likedBy: '被你的坚韧打动的人，欣赏你不服输精神的人',
-    friends: 'PROTECTOR（守护命）给你温暖，LUCKY（锦鲤命）带你好运',
-    motto: '明天会好的。',
+    friends: '天梁守命（护持型）给你温暖，天乙贵人（好运型）带你好运',
+    motto: '困难天天见，反向升级我最快。',
     exWouldSay: '他真的很努力，我应该多支持他',
     momWouldSay: '我儿子命苦，但一定能出头',
-    pattern: 'HHL-HHL-HHH-HHH-HLL',
-    weights: [2, 1, 2, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1]
+    pattern: 'HHHH-LHHM-HLHH-HHLM',
+    weights: [2, 2, 1, 1, 2, 1, 1, 1, 1, 1, 2, 2, 1, 2, 1, 1]
   },
 
   CLOWN: {
@@ -339,12 +339,12 @@ const TYPE_LIBRARY = {
     avoid: '忌把搞笑当唯一人格，忌在认真场合也抖机灵，忌用自嘲代替求助',
     likes: '能看穿你笑容背后的人，认真对待你的人',
     likedBy: '被你的幽默吸引的人，需要快乐的人',
-    friends: 'CHARM（桃花命）跟你一起快乐，FOODIE（食神命）跟你一起吃喝',
-    motto: '笑一个嘛！',
+    friends: '红鸾照命（桃花型）跟你一起快乐，食神生财（口福型）跟你一起吃喝',
+    motto: '脸上笑嘻嘻，其实只是保护色。',
     exWouldSay: '他很搞笑，但有时候我希望他认真一点',
     momWouldSay: '我儿子从小就爱逗人笑',
-    pattern: 'MLM-MHM-LML-MLL-MML',
-    weights: [1, 1, 1, 2, 1, 1, 3, 1, 1, 1, 1, 1, 2, 1, 1]
+    pattern: 'MMLL-MMMM-HMHH-LMMM',
+    weights: [1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 2, 2, 3, 1, 1, 1]
   },
 
   FOODIE: {
@@ -357,12 +357,12 @@ const TYPE_LIBRARY = {
     avoid: '忌深夜放毒，忌用美食照片轰炸群聊，忌在减肥的时候发美食',
     likes: '同样热爱美食的人，愿意陪你一起探店的人',
     likedBy: '被你的生活热情感染的人，觉得你会做饭很加分的人',
-    friends: 'WANDERER（流浪命）跟你一起吃遍世界，CLOWN（小丑命）跟你一起快乐',
-    motto: '先吃了再说。',
+    friends: '驿马临身（远行型）跟你一起吃遍世界，天喜逢场（谐趣型）跟你一起快乐',
+    motto: '世界这么大，先吃个饱再看戏。',
     exWouldSay: '他做的饭真的很好吃，就是太胖了',
     momWouldSay: '我儿子从小就爱吃',
-    pattern: 'LMH-MML-MLL-HML-MLL',
-    weights: [1, 2, 1, 1, 1, 1, 3, 1, 1, 1, 1, 1, 2, 1, 1]
+    pattern: 'LHMM-HMMM-MLML-MLLM',
+    weights: [1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1]
   },
 
   LAZY: {
@@ -375,12 +375,12 @@ const TYPE_LIBRARY = {
     avoid: '忌连续三天不出门，忌让外卖小哥记住你的地址，忌把"无所谓"当口头禅',
     likes: '同样佛系的人，不会催你上进的人',
     likedBy: '被你的淡定吸引的人，需要一个不焦虑的港湾的人',
-    friends: 'FOODIE（食神命）跟你一起享受生活，HERMIT（隐士命）跟你一起安静',
-    motto: '今天也是不想动的一天。',
+    friends: '食神生财（口福型）跟你一起享受生活，孤辰入命（隐逸型）跟你一起安静',
+    motto: '只要我躺得够快，焦虑就追不上我。',
     exWouldSay: '他很好相处，但有时候太佛了',
     momWouldSay: '我儿子就是懒了点，人是聪明的',
-    pattern: 'LLL-LML-LLL-MLL-LLL',
-    weights: [1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 2, 1, 1, 1, 1]
+    pattern: 'LMLL-LLLM-LLML-HLLL',
+    weights: [1, 1, 2, 1, 1, 1, 1, 1, 2, 2, 1, 1, 3, 1, 1, 2]
   },
 
   GAMER: {
@@ -393,12 +393,12 @@ const TYPE_LIBRARY = {
     avoid: '忌通宵，忌在群里发游戏截图，忌把游戏术语带到现实',
     likes: '同样爱玩游戏的人，不会说你"沉迷游戏"的人',
     likedBy: '被你的游戏技术吸引的人，觉得你很酷的人',
-    friends: 'CLOWN（小丑命）跟你一起开黑，REBEL（叛逆命）跟你一起叛逆',
-    motto: '再来一把！',
+    friends: '天喜逢场（谐趣型）跟你一起开黑，破军入命（破局型）跟你一起叛逆',
+    motto: '现实没人在意，游戏里我是真神。',
     exWouldSay: '他打游戏的时候别找他',
     momWouldSay: '我儿子天天打游戏，也不知道能干什么',
-    pattern: 'LLM-MLL-LLM-MLL-MMH',
-    weights: [1, 1, 1, 1, 2, 2, 1, 1, 2, 1, 1, 1, 1, 1, 1]
+    pattern: 'LMLL-MMMM-LLML-LLMM',
+    weights: [1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1]
   },
 
   ROMANTIC: {
@@ -411,12 +411,12 @@ const TYPE_LIBRARY = {
     avoid: '忌当舔狗，忌在深夜发伤感文案，忌把前任的朋友圈翻到底',
     likes: '同样重视感情的人，愿意跟你一起浪漫的人',
     likedBy: '被你的深情打动的人，需要被认真对待的人',
-    friends: 'CHARM（桃花命）跟你一起谈恋爱，PROTECTOR（守护命）保护你',
-    motto: '我爱你，与你无关。',
+    friends: '红鸾照命（桃花型）跟你一起谈恋爱，天梁守命（护持型）保护你',
+    motto: '戏还没开始，我已经把眼泪流干了。',
     exWouldSay: '他对我真的很好，但有时候太粘了',
     momWouldSay: '我儿子就是太重感情了',
-    pattern: 'HML-HLL-MLL-MHL-MHH',
-    weights: [2, 1, 1, 3, 1, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2]
+    pattern: 'HMHM-LMHM-LLML-MLHM',
+    weights: [2, 1, 1, 1, 1, 2, 3, 1, 1, 1, 1, 1, 2, 1, 1, 1]
   },
 
   NERD: {
@@ -429,12 +429,12 @@ const TYPE_LIBRARY = {
     avoid: '忌用学术语言跟普通人说话，忌在聚会上讲论文，忌把"研究表明"挂嘴边',
     likes: '同样爱学习的人，能跟你聊学术的人',
     likedBy: '被你的聪明吸引的人，觉得学霸很帅的人',
-    friends: 'SCHOLAR（文人命）跟你一起学习，GAMER（电竞命）带你放松',
-    motto: '这个我研究一下。',
+    friends: '文昌入命（文才型）跟你一起学习，将星入局（竞技型）带你放松',
+    motto: '脑子装得太满，人际关系装不下了。',
     exWouldSay: '他很聪明，但有时候太无聊了',
     momWouldSay: '我儿子学习从来不用我操心',
-    pattern: 'LML-MLM-LLL-MLL-HHH',
-    weights: [1, 1, 3, 1, 1, 2, 1, 1, 1, 1, 2, 2, 1, 1, 3]
+    pattern: 'LMLM-LHMM-LMML-LLHM',
+    weights: [1, 1, 2, 1, 3, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1]
   },
 
   BOSS: {
@@ -447,12 +447,12 @@ const TYPE_LIBRARY = {
     avoid: '忌画饼给员工，忌在朋友圈发创业鸡汤，忌把"我的梦想"挂嘴边',
     likes: '支持你创业梦想的人，愿意跟你一起奋斗的人',
     likedBy: '被你的野心吸引的人，觉得你很有魄力的人',
-    friends: 'MERCHANT（商贾命）跟你一起做生意，GENERAL（将军命）跟你一起打仗',
-    motto: '这个项目我投了。',
+    friends: '禄存守财（商贾型）跟你一起做生意，七杀坐命（将帅型）跟你一起打仗',
+    motto: '别跟我画饼，直接说分红多少。',
     exWouldSay: '他很有想法，但有时候太冒进了',
     momWouldSay: '我儿子说要创业，我也不知道靠不靠谱',
-    pattern: 'HHH-LMH-HHL-MHH-MHL',
-    weights: [3, 2, 1, 1, 1, 1, 1, 3, 2, 3, 1, 1, 1, 2, 1]
+    pattern: 'HMHH-HMLM-MHMH-HHHM',
+    weights: [3, 3, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 2, 1]
   },
 
   ORDINARY: {
@@ -465,14 +465,48 @@ const TYPE_LIBRARY = {
     avoid: '忌自我设限，忌把"我就是普通人"当借口，忌在深夜思考人生意义',
     likes: '同样平凡但真诚的人，不会给你贴标签的人',
     likedBy: '被你的真诚打动的人，需要一个稳定伴侣的人',
-    friends: 'LUCKY（锦鲤命）带你好运，PROTECTOR（守护命）给你温暖',
+    friends: '天乙贵人（好运型）带你好运，天梁守命（护持型）给你温暖',
     motto: '就这样吧。',
     exWouldSay: '他很好，就是太平凡了',
     momWouldSay: '我儿子挺好的，就是没什么特别的',
-    pattern: 'MLL-MLM-MLM-MLM-MLL',
-    weights: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    pattern: 'MMMM-MMMM-MMMM-MMMM',
+    weights: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
   }
 };
+
+const CLASSIC_TYPE_NAMES = {
+  EMPR: ['紫微入命', '帝王型'],
+  GENERAL: ['七杀坐命', '将帅型'],
+  CAREER: ['官禄得地', '事业型'],
+  SCHOLAR: ['文昌入命', '文才型'],
+  FAME: ['魁钺拱照', '声名型'],
+  WANDERER: ['驿马临身', '远行型'],
+  REBEL: ['破军入命', '破局型'],
+  CHARM: ['红鸾照命', '桃花型'],
+  MERCHANT: ['禄存守财', '商贾型'],
+  FORTUNE: ['天府坐命', '富贵型'],
+  LUCKY: ['天乙贵人', '好运型'],
+  SAGE: ['天机入命', '术数型'],
+  MYSTIC: ['华盖临命', '神秘型'],
+  HERMIT: ['孤辰入命', '隐逸型'],
+  SPIRIT: ['太乙照神', '灵修型'],
+  PROTECTOR: ['天梁守命', '护持型'],
+  LONER: ['寡宿临命', '孤星型'],
+  HARD: ['羊刃磨命', '磨砺型'],
+  CLOWN: ['天喜逢场', '谐趣型'],
+  FOODIE: ['食神生财', '口福型'],
+  LAZY: ['养星守命', '安逸型'],
+  GAMER: ['将星入局', '竞技型'],
+  ROMANTIC: ['咸池动情', '情深型'],
+  NERD: ['文曲入命', '学识型'],
+  BOSS: ['武曲化权', '掌局型'],
+  ORDINARY: ['中和守命', '平常型']
+};
+
+Object.entries(CLASSIC_TYPE_NAMES).forEach(([code, [classic, classicNote]]) => {
+  TYPE_LIBRARY[code].classic = classic;
+  TYPE_LIBRARY[code].classicNote = classicNote;
+});
 
 const NORMAL_TYPES = Object.keys(TYPE_LIBRARY).map(code => ({
   code,

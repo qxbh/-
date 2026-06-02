@@ -1,78 +1,33 @@
 /**
- * 玄学人格测试 - 自适应评分引擎
- * 支持分阶段计算 + 动态选题
+ * 玄学人格测试 - 评分引擎 (16维主副计分版)
  */
 
 const XuanxueEngine = (() => {
 
   /**
-   * 根据当前答案，判断用户属于哪个方向集群
-   * 返回一个方向 key，对应 TARGETED_QUESTIONS 的分组
-   */
-  function detectCluster(answers) {
-    // 收集已答维度的分数
-    const scores = {};
-    let count = 0;
-    for (const [qId, val] of Object.entries(answers)) {
-      const q = BASE_QUESTIONS.find(q => q.id === qId);
-      if (q) {
-        scores[q.dim] = (scores[q.dim] || 0) + val;
-        count++;
-      }
-    }
-
-    // 如果基础题还没答几道，返回均衡
-    if (count < 5) return 'balanced';
-
-    // D1 高 → 领导方向
-    if ((scores.D1 || 0) >= 5) return 'leader';
-    // D2 高 → 财富方向
-    if ((scores.D2 || 0) >= 5) return 'wealth';
-    // D3 或 D6 高 → 思考方向
-    if ((scores.D3 || 0) >= 5 || (scores.D6 || 0) >= 5) return 'thinker';
-    // D4 高 → 魅力方向
-    if ((scores.D4 || 0) >= 5) return 'charm';
-    // D5 高 → 流浪方向
-    if ((scores.D5 || 0) >= 5) return 'wanderer';
-
-    return 'balanced';
-  }
-
-  /**
-   * 根据当前答案和阶段，选择下一轮的题目
-   * 简化版：直接返回所有题目
-   * @param {'base'|'targeted'|'tiebreaker'} phase
-   * @param {Object} answers - 当前已答题目
-   * @returns {Array} 本轮要展示的题目
+   * 选择题目 (直接返回所有题目)
    */
   function selectQuestions(phase, answers) {
     if (phase === 'base') {
-      return BASE_QUESTIONS;
+      return QUESTIONS;
     }
     return [];
-  }
-
-  /**
-   * 部分计算（用于中间阶段，返回初步结果）
-   * 和 computeResult 逻辑一样，但可以处理不完整答案
-   */
-  function computePartial(answers) {
-    const allQuestions = [...BASE_QUESTIONS, ...Object.values(TARGETED_QUESTIONS).flat(), ...TIEBREAKER_QUESTIONS];
-    return computeResultFrom(allQuestions, answers);
   }
 
   /**
    * 最终计算
    */
   function computeResult(answers) {
-    return computeResultFrom(BASE_QUESTIONS, answers);
+    return computeResultFrom(QUESTIONS, answers);
   }
 
   /**
    * 核心计算逻辑
+   * 每题主测1个维度，副测1-2个维度
+   * 选项 value 1-3 对应不同分数
    */
   function computeResultFrom(allQuestions, answers) {
-    // 1. 计算每维度原始分
+    // 1. 初始化得分
     const rawScores = {};
     const questionCounts = {};
 
@@ -81,32 +36,64 @@ const XuanxueEngine = (() => {
       questionCounts[dim] = 0;
     });
 
+    // 2. 遍历题目，计算主副维度得分
     allQuestions.forEach(q => {
-      const val = Number(answers[q.id] || 0);
-      if (val > 0) {
-        rawScores[q.dim] += val;
-        questionCounts[q.dim] = (questionCounts[q.dim] || 0) + 1;
+      const chosenVal = answers[q.id];
+      if (chosenVal === undefined) return;
+
+      const value = Number(chosenVal);
+
+      // 主测维度：得分为选项值（1/2/3）
+      if (q.mainDim && rawScores[q.mainDim] !== undefined) {
+        rawScores[q.mainDim] += value;
+        questionCounts[q.mainDim] = (questionCounts[q.mainDim] || 0) + 1;
+      }
+
+      // 副测维度：得分减半
+      if (q.subDims) {
+        q.subDims.forEach(dim => {
+          if (rawScores[dim] !== undefined) {
+            rawScores[dim] += value * 0.5;
+            questionCounts[dim] = (questionCounts[dim] || 0) + 0.5;
+          }
+        });
       }
     });
 
-    // 2. 转换为等级（基于实际回答的题目数，动态调整阈值）
-    const levels = {};
+    // 3. 计算最大可能得分并转换为百分比
+    const maxPossible = {};
     DIMENSION_ORDER.forEach(dim => {
-      const cnt = questionCounts[dim] || 3;
-      const maxScore = cnt * 3;
-      const normalized = rawScores[dim] / maxScore;
-      if (normalized <= 0.4) levels[dim] = 'L';
-      else if (normalized <= 0.7) levels[dim] = 'M';
-      else levels[dim] = 'H';
+      // 每个维度最多被多少题测到
+      let mainCount = 0;
+      let subCount = 0;
+      allQuestions.forEach(q => {
+        if (q.mainDim === dim) mainCount++;
+        if (q.subDims && q.subDims.includes(dim)) subCount++;
+      });
+      // 主测题满分 = 主测数 × 3，副测题满分 = 副测数 × 3 × 0.5
+      maxPossible[dim] = mainCount * 3 + subCount * 1.5;
     });
 
-    // 3. 生成用户向量
+    // 4. 转换为等级
+    const levels = {};
+    DIMENSION_ORDER.forEach(dim => {
+      if (maxPossible[dim] === 0) {
+        levels[dim] = 'M'; // 没有题目测到，默认中等
+      } else {
+        const percent = rawScores[dim] / maxPossible[dim];
+        if (percent <= 0.4) levels[dim] = 'L';
+        else if (percent <= 0.75) levels[dim] = 'M';
+        else levels[dim] = 'H';
+      }
+    });
+
+    // 5. 生成用户向量
     const userVector = DIMENSION_ORDER.map(dim => levels[dim]);
 
-    // 4. 与每个命格类型计算加权距离
+    // 6. 与每个命格类型计算加权距离
     const ranked = NORMAL_TYPES.map(type => {
       const vector = parsePattern(type.pattern);
-      const weights = type.weights || Array(15).fill(1); // 默认权重为1
+      const weights = type.weights || Array(16).fill(1);
       let weightedDist = 0;
       let maxPossibleDist = 0;
       let exact = 0;
@@ -114,11 +101,10 @@ const XuanxueEngine = (() => {
       for (let i = 0; i < vector.length; i++) {
         const diff = Math.abs(levelNum(userVector[i]) - levelNum(vector[i]));
         weightedDist += diff * weights[i];
-        maxPossibleDist += 2 * weights[i]; // 最大差值2 × 权重
+        maxPossibleDist += 2 * weights[i];
         if (diff === 0) exact += 1;
       }
 
-      // 相似度 = (1 - 加权距离 / 最大可能距离) × 100%
       const similarity = Math.max(0, Math.round((1 - weightedDist / maxPossibleDist) * 100));
 
       return {
@@ -128,38 +114,38 @@ const XuanxueEngine = (() => {
         similarity
       };
     }).sort((a, b) => {
-      // 先按相似度降序，再按精确命中数降序
       if (b.similarity !== a.similarity) return b.similarity - a.similarity;
       if (b.exact !== a.exact) return b.exact - a.exact;
       return a.distance - b.distance;
     });
 
-    // 5. 取前3个作为候选结果
+    // 7. 取前3个作为候选结果
     const candidates = ranked.slice(0, 3);
     const bestNormal = ranked[0];
     const finalType = bestNormal;
 
-    // 6. 生成五行分析
+    // 8. 生成五行分析
     const wuxing = {
-      金: { level: levels.D10, name: wuxingLevelName('D10', levels.D10) },
-      木: { level: levels.D11, name: wuxingLevelName('D11', levels.D11) },
-      水: { level: levels.D12, name: wuxingLevelName('D12', levels.D12) },
-      火: { level: levels.D13, name: wuxingLevelName('D13', levels.D13) },
-      土: { level: levels.D14, name: wuxingLevelName('D14', levels.D14) }
+      金: { level: levels.D2, name: wuxingLevelName('D2', levels.D2) },
+      木: { level: levels.D3, name: wuxingLevelName('D3', levels.D3) },
+      水: { level: levels.D5, name: wuxingLevelName('D5', levels.D5) },
+      火: { level: levels.D6, name: wuxingLevelName('D6', levels.D6) },
+      土: { level: levels.D13, name: wuxingLevelName('D13', levels.D13) }
     };
 
-    // 7. 生成神煞感应
+    // 9. 生成神煞感应
     const shensha = [];
-    if (levels.D4 === 'H') shensha.push({ name: '桃花', level: '烂桃花' });
-    else if (levels.D4 === 'M') shensha.push({ name: '桃花', level: '旺' });
-    if (levels.D5 === 'H') shensha.push({ name: '驿马', level: '动' });
-    else if (levels.D5 === 'M') shensha.push({ name: '驿马', level: '稳' });
-    if (levels.D6 === 'H') shensha.push({ name: '华盖', level: '玄' });
-    else if (levels.D6 === 'M') shensha.push({ name: '华盖', level: '雅' });
-    if (levels.D3 === 'H') shensha.push({ name: '贵人', level: '多' });
-    if (levels.D2 === 'H') shensha.push({ name: '财星', level: '旺' });
+    if (levels.D7 === 'H') shensha.push({ name: '红鸾', level: '动' });
+    else if (levels.D7 === 'M') shensha.push({ name: '红鸾', level: '稳' });
+    if (levels.D9 === 'H') shensha.push({ name: '驿马', level: '动' });
+    else if (levels.D9 === 'M') shensha.push({ name: '驿马', level: '稳' });
+    if (levels.D10 === 'H') shensha.push({ name: '华盖', level: '玄' });
+    else if (levels.D10 === 'M') shensha.push({ name: '华盖', level: '雅' });
+    if (levels.D11 === 'H') shensha.push({ name: '孤辰', level: '重' });
+    if (levels.D4 === 'H') shensha.push({ name: '禄存', level: '旺' });
+    if (levels.D14 === 'H') shensha.push({ name: '破军', level: '烈' });
 
-    // 8. 生成维度详情
+    // 10. 生成维度详情
     const dimDetails = DIMENSION_ORDER.map(dim => {
       const meta = DIMENSION_META[dim];
       const level = levels[dim];
@@ -169,7 +155,7 @@ const XuanxueEngine = (() => {
         group: meta.group,
         level,
         levelName: getDimLevelName(dim, level),
-        rawScore: rawScores[dim]
+        rawScore: Math.round(rawScores[dim] * 10) / 10
       };
     });
 
@@ -194,8 +180,6 @@ const XuanxueEngine = (() => {
 
   return {
     computeResult,
-    computePartial,
-    selectQuestions,
-    detectCluster
+    selectQuestions
   };
 })();

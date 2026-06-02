@@ -1,13 +1,13 @@
 /**
  * 玄学人格测试 - 结果海报生成
- * 1080×1920 竖屏分享图，纯 Canvas 绘制，不依赖图片
+ * 1080×1920 竖屏分享图，Canvas 绘制
  */
 
 const XuanxuePoster = (() => {
   const W = 1080;
   const H = 1920;
 
-  // 每种命格对应的 emoji icon
+  // 图片加载失败时的备用 icon
   const TYPE_ICONS = {
     EMPR: '🐉', GENERAL: '⚔️', CAREER: '💼', SCHOLAR: '📚',
     FAME: '🏆', WANDERER: '🗺️', REBEL: '🔥', CHARM: '🌸',
@@ -18,7 +18,24 @@ const XuanxuePoster = (() => {
     BOSS: '👔', ORDINARY: '🪨'
   };
 
-  function generate(result) {
+  function getTypeArtSrc(type) {
+    return `image/types/${type.code.toLowerCase()}.png`;
+  }
+
+  function getTypeDisplayName(type) {
+    return `${type.classic || type.cn}（${type.classicNote || type.cn}）`;
+  }
+
+  function loadImage(src) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = reject;
+      img.src = src;
+    });
+  }
+
+  async function generate(result) {
     const canvas = document.createElement('canvas');
     canvas.width = W;
     canvas.height = H;
@@ -80,34 +97,43 @@ const XuanxuePoster = (() => {
     ctx.lineWidth = 1.5;
     ctx.beginPath(); ctx.moveTo(80, 175); ctx.lineTo(W - 80, 175); ctx.stroke();
 
-    // ── Emoji 大图标 ──
-    const icon = TYPE_ICONS[type.code] || '🔮';
-    ctx.font = '120px serif';
-    ctx.fillText(icon, W / 2, 280);
+    // ── 命格人物图 ──
+    try {
+      const art = await loadImage(getTypeArtSrc(type));
+      ctx.save();
+      roundRect(ctx, W / 2 - 140, 205, 280, 280, 28);
+      ctx.clip();
+      ctx.drawImage(art, W / 2 - 140, 205, 280, 280);
+      ctx.restore();
+    } catch (err) {
+      const icon = TYPE_ICONS[type.code] || '🔮';
+      ctx.font = '120px serif';
+      ctx.fillText(icon, W / 2, 280);
+    }
 
     // ── 命格类型 ──
     ctx.fillStyle = '#4d6a53';
     ctx.font = '500 28px "PingFang SC", "Microsoft YaHei", sans-serif';
-    ctx.fillText('你的命格是', W / 2, 380);
+    ctx.fillText('你的命格是', W / 2, 535);
 
     ctx.fillStyle = '#1e2a22';
     ctx.font = '900 68px "PingFang SC", "Microsoft YaHei", sans-serif';
-    ctx.fillText(`${type.code}`, W / 2, 460);
+    ctx.fillText(`${type.classic || type.cn}`, W / 2, 615);
 
     ctx.fillStyle = '#1e2a22';
     ctx.font = '800 52px "PingFang SC", "Microsoft YaHei", sans-serif';
-    ctx.fillText(`（${type.cn}）`, W / 2, 530);
+    ctx.fillText(`（${type.classicNote || type.cn}）`, W / 2, 685);
 
     // 匹配度
     ctx.fillStyle = '#4d6a53';
     ctx.font = '700 24px "PingFang SC", "Microsoft YaHei", sans-serif';
-    ctx.fillText(`匹配度 ${result.similarity}% · 精准命中 ${result.exactHits}/15 维`, W / 2, 590);
+    ctx.fillText(`匹配度 ${result.similarity}% · 精准命中 ${result.exactHits}/15 维`, W / 2, 745);
 
     // intro
     ctx.fillStyle = '#6a786f';
     ctx.font = 'italic 26px "PingFang SC", "Microsoft YaHei", sans-serif';
     const introLines = wrapText(ctx, `「${type.intro}」`, W - 200);
-    let y = 640;
+    let y = 795;
     introLines.forEach(line => {
       ctx.fillText(line, W / 2, y);
       y += 36;
@@ -251,8 +277,8 @@ const XuanxuePoster = (() => {
     return lines;
   }
 
-  function download(result) {
-    const canvas = generate(result);
+  async function download(result) {
+    const canvas = await generate(result);
     const link = document.createElement('a');
     link.download = `xuanxue-${result.finalType.code}-${Date.now()}.png`;
     link.href = canvas.toDataURL('image/png');
