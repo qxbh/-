@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#f6faf6">
+  <link rel="icon" href="image/favicon.svg" type="image/svg+xml">
+  <title>玄学人格测试 | 看看你是什么命</title>
+  <meta name="description" content="45道题测出你的命格类型。命格、五行、神煞、宿命，看看你到底是哪种人。">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="玄学人格测试">
+  <meta property="og:description" content="45道题测出你的命格类型。命格、五行、神煞、宿命。">
+  <meta property="og:image" content="./image/og-cover.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="玄学人格测试">
+  <meta name="twitter:description" content="45道题测出你的命格类型。">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="shell">
+
+    <!-- 顶部导航栏 -->
+    <nav class="topnav">
+      <a class="topnav-brand" href="#">赛博测算</a>
+      <span class="topnav-sub">SBTI 系列 · 玄学人格</span>
+    </nav>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- 启动页 -->
+    <!-- ═══════════════════════════════════════ -->
+    <section id="start-screen" class="screen active">
+      <div class="hero card">
+        <div class="intro-lead">
+          <div class="badge">SBTI 系列</div>
+          <h1>玄学人格测试</h1>
+          <p class="sub">45 道题，测出你的命格类型。<br>命运不认路，但认识你。</p>
+          <div class="hero-actions hero-actions-single">
+            <button id="btn-start" class="btn-primary">开始测试</button>
+          </div>
+          <p class="start-hint">命格 · 五行 · 神煞 · 宿命</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- 测试页 -->
+    <!-- ═══════════════════════════════════════ -->
+    <section id="test-screen" class="screen">
+      <div class="test-wrap card">
+        <div class="topbar">
+          <div class="progress">
+            <div id="progressBar" class="progress-bar-fill"></div>
+          </div>
+          <div class="progress-text" id="progressText">0 / 45</div>
+        </div>
+
+        <div id="questionList" class="question-list"></div>
+
+        <div class="actions-bottom">
+          <div class="hint" id="testHint">选完自动跳下一题。世界已经够乱了，起码把题做完整。</div>
+          <div class="question-nav-actions">
+            <button id="btn-prev" class="btn-secondary" disabled>上一题</button>
+            <button id="btn-submit" class="btn-primary" disabled>提交并查看结果</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 全部完成弹窗 -->
+      <div id="completionModal" class="completion-modal" aria-hidden="true">
+        <div class="completion-modal__backdrop" data-close-completion></div>
+        <div class="completion-modal__dialog" role="dialog" aria-modal="true">
+          <button id="closeCompletionModalBtn" class="completion-modal__close" type="button" aria-label="关闭">×</button>
+          <div class="badge" style="margin-bottom:12px;">全部完成</div>
+          <h2 class="completion-modal__title">可以提交并查看结果了</h2>
+          <p class="completion-modal__text">题目已经答完。你可以直接看结果，也可以先关闭这个浮层，回头改几题再交。</p>
+          <div class="completion-modal__actions">
+            <button id="editAnswersBtn" class="btn-secondary" type="button">再检查一下</button>
+            <button id="submitFromModalBtn" class="btn-primary" type="button">提交并查看结果</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- 结果页 -->
+    <!-- ═══════════════════════════════════════ -->
+    <section id="result-screen" class="screen">
+      <div class="result-wrap card">
+        <div class="result-layout">
+
+          <!-- 顶部：海报 + 命格类型 -->
+          <div class="result-top">
+            <div class="poster-box">
+              <div class="poster-preview" id="posterPreview"></div>
+            </div>
+            <div class="type-box">
+              <div class="type-kicker" id="resultModeKicker">你的命格是</div>
+              <div class="type-name" id="resultTypeName">EMPR（帝王命）</div>
+              <div class="type-subname" id="resultTypeSub">天生领袖，气场压制，命带官星。</div>
+              <div class="match-badge" id="matchBadge">匹配度 92%</div>
+            </div>
+          </div>
+
+          <!-- 灵魂画像 -->
+          <div class="portrait-box">
+            <h3>🔮 你的灵魂画像</h3>
+            <p id="portraitText"></p>
+          </div>
+
+          <!-- 天命评分 -->
+          <div class="score-box">
+            <h3>⚡ 天命综合评分</h3>
+            <div id="scoreGrid" class="score-grid"></div>
+          </div>
+
+          <!-- 超能力 -->
+          <div class="power-box">
+            <h3>💪 你的超能力</h3>
+            <div id="powerList" class="power-list"></div>
+          </div>
+
+          <!-- 致命弱点 -->
+          <div class="weakness-box">
+            <h3>💀 你的致命弱点</h3>
+            <p id="weaknessText"></p>
+          </div>
+
+          <!-- 灵魂标签 -->
+          <div class="motto-box">
+            <h3>🏷️ 你的灵魂标签</h3>
+            <div id="mottoText" class="motto-text"></div>
+          </div>
+
+          <!-- 感情画像 -->
+          <div class="love-box">
+            <h3>💕 感情画像</h3>
+            <div class="love-grid">
+              <div class="love-item">
+                <div class="love-label">你喜欢的人</div>
+                <div class="love-value" id="typeLikes"></div>
+              </div>
+              <div class="love-item">
+                <div class="love-label">喜欢你的人</div>
+                <div class="love-value" id="typeLikedBy"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 他们怎么看你 -->
+          <div class="quotes-box">
+            <h3>💬 他们怎么看你</h3>
+            <div class="quotes-grid">
+              <div class="quote-item">
+                <div class="quote-role">前任说</div>
+                <div class="quote-text" id="quoteEx"></div>
+              </div>
+              <div class="quote-item">
+                <div class="quote-role">你妈说</div>
+                <div class="quote-text" id="quoteMom"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 灵魂搭档 -->
+          <div class="partner-box">
+            <h3>🤝 适合跟谁交朋友</h3>
+            <div id="partnerList" class="partner-list"></div>
+          </div>
+
+          <!-- 五行分析 -->
+          <div class="wuxing-box">
+            <h3>☯️ 五行能量场</h3>
+            <div class="wuxing-grid" id="wuxingList"></div>
+          </div>
+
+          <!-- 神煞感应 -->
+          <div class="shensha-box">
+            <h3>✨ 神煞感应</h3>
+            <div class="shensha-list" id="shenshaList"></div>
+          </div>
+
+          <!-- 命格解读 -->
+          <div class="analysis-box">
+            <h3>📜 命格详解</h3>
+            <p class="result-desc" id="resultDesc"></p>
+          </div>
+
+          <!-- 维度详情 -->
+          <div class="dim-box">
+            <h3>📊 维度雷达</h3>
+            <div class="dim-list" id="dimList"></div>
+          </div>
+
+          <!-- 开运建议 -->
+          <div class="advice-box">
+            <h3>🍀 开运指南</h3>
+            <div class="advice-grid">
+              <div class="advice-item">
+                <span class="advice-label">适合职业</span>
+                <span class="advice-value" id="adviceCareer"></span>
+              </div>
+              <div class="advice-item">
+                <span class="advice-label">幸运颜色</span>
+                <span class="advice-value" id="adviceColor"></span>
+              </div>
+              <div class="advice-item">
+                <span class="advice-label">宜忌</span>
+                <span class="advice-value" id="adviceAvoid"></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 分享文案 -->
+          <div class="share-box">
+            <h3>📤 分享你的结果</h3>
+            <div class="share-text" id="shareText"></div>
+            <div style="display:flex; gap:12px; flex-wrap:wrap;">
+              <button id="btn-copy" class="btn-secondary">📋 复制结果文案</button>
+            </div>
+            <p class="share-hint">手机端长按结果图即可保存，电脑端可直接右键另存为。</p>
+          </div>
+
+          <!-- 友情提示 -->
+          <div class="note-box">
+            <h3>友情提示</h3>
+            <p>本测试仅供娱乐，别拿它当诊断、面试、相亲、分手、招魂、算命或人生判决书。</p>
+          </div>
+
+        </div>
+
+        <!-- 底部按钮 -->
+        <div class="result-actions">
+          <div style="display:flex; gap:12px; flex-wrap:wrap;">
+            <button id="btn-retry" class="btn-secondary">🔄 重新测试</button>
+            <button id="btn-download" class="btn-primary">📥 保存结果图</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Toast -->
+  <div id="copyToast" class="copy-toast">已复制到剪贴板</div>
+
+  <script src="js/questions.js"></script>
+  <script src="js/dimensions.js"></script>
+  <script src="js/types.js"></script>
+  <script src="js/engine.js"></script>
+  <script src="js/poster.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
