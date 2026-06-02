@@ -489,6 +489,63 @@
     };
   }
 
+  // ═══════════════════════════════════════
+  // 综合总结
+  // ═══════════════════════════════════════
+  function buildSummary(result) {
+    const type = result.finalType;
+    const d = result.levels;
+    const wuxingAnalysis = buildWuxingAnalysis(result);
+
+    // 性格特点总结
+    const personalityTraits = [];
+    if (d.D1 === 'H') personalityTraits.push('天生的领导者');
+    if (d.D1 === 'L') personalityTraits.push('低调的幕后英雄');
+    if (d.D2 === 'H') personalityTraits.push('商业嗅觉敏锐');
+    if (d.D3 === 'H') personalityTraits.push('求知欲旺盛');
+    if (d.D4 === 'H') personalityTraits.push('魅力四射');
+    if (d.D5 === 'H') personalityTraits.push('自由的灵魂');
+    if (d.D6 === 'H') personalityTraits.push('神秘的思想家');
+    if (d.D7 === 'H') personalityTraits.push('社交达人');
+    if (d.D8 === 'H') personalityTraits.push('叛逆的创新者');
+    if (d.D9 === 'H') personalityTraits.push('独立的个体');
+    if (d.D10 === 'H') personalityTraits.push('果断的执行者');
+    if (d.D11 === 'H') personalityTraits.push('成长型选手');
+    if (d.D12 === 'H') personalityTraits.push('深沉的智者');
+    if (d.D13 === 'H') personalityTraits.push('热情的感染力');
+    if (d.D14 === 'H') personalityTraits.push('稳重的磐石');
+    if (d.D15 === 'H') personalityTraits.push('天命感应者');
+
+    const traitText = personalityTraits.length > 0
+      ? personalityTraits.slice(0, 3).join('、')
+      : '均衡发展';
+
+    // 运势分析
+    let fortuneText = '';
+    if (d.D4 === 'H') fortuneText += '桃花旺盛，异性缘爆棚。';
+    if (d.D5 === 'H') fortuneText += '驿马星动，适合变动和发展。';
+    if (d.D6 === 'H') fortuneText += '华盖照命，艺术感和直觉力强。';
+    if (!fortuneText) fortuneText = '命盘平稳，运势平稳上升。';
+
+    // 建议
+    const adviceList = [];
+    if (d.D10 === 'L') adviceList.push('增强决断力，相信自己的判断');
+    if (d.D11 === 'L') adviceList.push('保持好奇心，多尝试新事物');
+    if (d.D12 === 'L') adviceList.push('学会深思熟虑，不要急于表态');
+    if (d.D13 === 'L') adviceList.push('多表达自己的情感和想法');
+    if (d.D14 === 'L') adviceList.push('培养耐心，做事更稳重');
+    if (d.D1 === 'H' && d.D8 === 'H') adviceList.push('学会倾听他人意见，避免过于强势');
+    if (d.D4 === 'H') adviceList.push('桃花虽旺，但要擦亮眼睛');
+    if (d.D5 === 'H') adviceList.push('变动虽多，但要把握机会');
+    if (adviceList.length === 0) adviceList.push('保持现在的状态，继续发光发热');
+
+    return {
+      traitText,
+      fortuneText,
+      adviceList: adviceList.slice(0, 3)
+    };
+  }
+
   function buildPartners(result) {
     const type = result.finalType;
     const partnerMap = {
@@ -737,6 +794,24 @@
     document.getElementById('resultDesc').textContent = type.desc;
 
     document.getElementById('portraitText').textContent = buildPortrait(lastResult);
+
+    // 综合总结
+    const summary = buildSummary(lastResult);
+    const summaryContent = document.getElementById('summaryContent');
+    summaryContent.innerHTML = `
+      <div class="summary-section">
+        <div class="summary-label">🏷️ 性格关键词</div>
+        <div class="summary-value">${summary.traitText}</div>
+      </div>
+      <div class="summary-section">
+        <div class="summary-label">📈 运势提示</div>
+        <div class="summary-value">${summary.fortuneText}</div>
+      </div>
+      <div class="summary-section">
+        <div class="summary-label">💡 给你的建议</div>
+        <div class="summary-value">${summary.adviceList.join('；')}</div>
+      </div>
+    `;
 
     const scoreGrid = document.getElementById('scoreGrid');
     scoreGrid.innerHTML = buildScores(lastResult).map(s => `

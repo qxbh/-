@@ -1125,6 +1125,39 @@ button:disabled { cursor: not-allowed; opacity: 0.55; transform: none; }
 }
 
 /* ═══════════════════════════════════════ */
+/* 综合总结                                */
+/* ═══════════════════════════════════════ */
+.summary-box {
+  background: linear-gradient(135deg, #f8f4ff 0%, #fff0f6 100%);
+  border-radius: var(--radius-inner);
+  padding: 20px;
+}
+
+.summary-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.summary-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.summary-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent-strong);
+}
+
+.summary-value {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+/* ═══════════════════════════════════════ */
 /* 平板响应式 (≤860px)                     */
 /* ═══════════════════════════════════════ */
 @media (max-width: 860px) {
