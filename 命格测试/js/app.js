@@ -352,9 +352,13 @@
       ? result.shensha.map(s => `${s.name}(${s.level})`).join('、')
       : '命盘平稳';
 
+    // 五行偏向分析
+    const wuxingAnalysis = buildWuxingAnalysis(result);
+
     return `我在「玄学人格测试」测出的命格是：${type.code}（${type.cn}）
 「${type.intro}」
 匹配度 ${result.similarity}% · ${result.exactHits}/15 维精准命中
+主属性：${wuxingAnalysis.dominant.name}（${wuxingAnalysis.level}）
 五行：${wuxingStr}
 神煞：${shenshaStr}
 适合职业：${type.career}
@@ -497,6 +501,61 @@
       return '你几乎没有弱点，但建议偶尔示弱，让别人也有保护你的机会——毕竟你太强了，别人会自卑的。';
     }
     return weaknesses.slice(0, 3).join('；') + '。不过弱点也是特点，接纳它就好——毕竟没有弱点的人生多无聊啊。';
+  }
+
+  // ═══════════════════════════════════════
+  // 五行偏向分析
+  // ═══════════════════════════════════════
+  function buildWuxingAnalysis(result) {
+    const d = result.levels;
+    const wuxingMap = {
+      'D10': { element: '金', name: '金', icon: '⚔️', trait: '决断', desc: '刚毅果断，说一不二' },
+      'D11': { element: '木', name: '木', icon: '🌳', trait: '生长', desc: '生机勃勃，向上生长' },
+      'D12': { element: '水', name: '水', icon: '💧', trait: '智慧', desc: '灵动变通，深不可测' },
+      'D13': { element: '火', name: '火', icon: '🔥', trait: '热情', desc: '热情似火，感染力强' },
+      'D14': { element: '土', name: '土', icon: '⛰️', trait: '稳定', desc: '稳重踏实，包容万物' }
+    };
+
+    // 计算五行得分
+    const scores = {};
+    for (const [dim, info] of Object.entries(wuxingMap)) {
+      const level = d[dim];
+      scores[dim] = level === 'H' ? 3 : level === 'M' ? 2 : 1;
+    }
+
+    // 找出最强的五行
+    let maxDim = 'D10';
+    let maxScore = 0;
+    for (const [dim, score] of Object.entries(scores)) {
+      if (score > maxScore) {
+        maxScore = score;
+        maxDim = dim;
+      }
+    }
+
+    const dominant = wuxingMap[maxDim];
+    const level = d[maxDim];
+    const levelText = level === 'H' ? '极强' : level === 'M' ? '中等' : '偏弱';
+
+    // 生成五行平衡描述
+    const allElements = Object.entries(scores)
+      .sort((a, b) => b[1] - a[1])
+      .map(([dim, score]) => wuxingMap[dim].name);
+
+    let balanceDesc = '';
+    if (allElements[0] === allElements[1]) {
+      balanceDesc = `你主修${allElements[0]}，兼修${allElements[1]}，双属性加持`;
+    } else {
+      balanceDesc = `你主修${allElements[0]}，${allElements[1]}为辅`;
+    }
+
+    return {
+      dominant: dominant,
+      level: levelText,
+      balanceDesc: balanceDesc,
+      scores: scores,
+      levelMap: d
+    };
   }
 
   function buildPartners(result) {
@@ -787,6 +846,21 @@
         <span class="partner-intro">${p.intro}</span>
       </div>
     `).join('');
+
+    // 五行偏向分析
+    const wuxingAnalysis = buildWuxingAnalysis(lastResult);
+    const wuxingAnalysisEl = document.getElementById('wuxingAnalysis');
+    wuxingAnalysisEl.innerHTML = `
+      <div class="wuxing-dominant">
+        <div class="wuxing-dominant-icon">${wuxingAnalysis.dominant.icon}</div>
+        <div class="wuxing-dominant-info">
+          <div class="wuxing-dominant-title">你的主属性：${wuxingAnalysis.dominant.name}</div>
+          <div class="wuxing-dominant-desc">${wuxingAnalysis.dominant.desc}</div>
+          <div class="wuxing-dominant-level">强度：${wuxingAnalysis.level}</div>
+        </div>
+      </div>
+      <div class="wuxing-balance">${wuxingAnalysis.balanceDesc}</div>
+    `;
 
     const wuxingList = document.getElementById('wuxingList');
     wuxingList.innerHTML = ['金', '木', '水', '火', '土'].map(wx => {

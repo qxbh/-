@@ -1065,6 +1065,66 @@ button:disabled { cursor: not-allowed; opacity: 0.55; transform: none; }
 }
 
 /* ═══════════════════════════════════════ */
+/* 五行偏向分析                            */
+/* ═══════════════════════════════════════ */
+.wuxing-analysis {
+  background: linear-gradient(135deg, var(--soft) 0%, #f0f6f1 100%);
+  border-radius: var(--radius-inner);
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.wuxing-dominant {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.wuxing-dominant-icon {
+  font-size: 48px;
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border-radius: 50%;
+  box-shadow: var(--shadow-sm);
+}
+
+.wuxing-dominant-info {
+  flex: 1;
+}
+
+.wuxing-dominant-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--accent-strong);
+  margin-bottom: 4px;
+}
+
+.wuxing-dominant-desc {
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+
+.wuxing-dominant-level {
+  font-size: 13px;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.wuxing-balance {
+  font-size: 14px;
+  color: var(--text);
+  text-align: center;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+/* ═══════════════════════════════════════ */
 /* 平板响应式 (≤860px)                     */
 /* ═══════════════════════════════════════ */
 @media (max-width: 860px) {
