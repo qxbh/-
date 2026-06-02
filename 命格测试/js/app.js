@@ -312,9 +312,9 @@
     // 五行偏向分析
     const wuxingAnalysis = buildWuxingAnalysis(result);
 
-    return `我在「玄学人格测试」测出的命格是：${type.code}（${type.cn}）
+    return `我在「玄学人格测试」测出的命格是：${type.classic}（${type.classicNote}）
 「${type.intro}」
-匹配度 ${result.similarity}% · ${result.exactHits}/15 维精准命中
+匹配度 ${result.similarity}% · ${result.exactHits}/16 维精准命中
 主属性：${wuxingAnalysis.dominant.name}（${wuxingAnalysis.level}）
 五行：${wuxingStr}
 神煞：${shenshaStr}
@@ -401,33 +401,34 @@
       return arr[Math.floor(Math.random() * arr.length)];
     };
     return [
-      { label: '气场值', value: getScore(d.D1), icon: '👑' },
-      { label: '财运', value: getScore(d.D2), icon: '💰' },
-      { label: '智商', value: getScore(d.D3), icon: '🧠' },
-      { label: '魅力值', value: getScore(d.D4), icon: '✨' },
-      { label: '行动力', value: getScore(d.D5), icon: '⚡' },
-      { label: '悟性', value: getScore(d.D6), icon: '🔮' }
+      { label: '气场', value: getScore(d.D1), icon: '👑' },
+      { label: '行动力', value: getScore(d.D2), icon: '⚡' },
+      { label: '事业', value: getScore(d.D3), icon: '🎯' },
+      { label: '财感', value: getScore(d.D4), icon: '💰' },
+      { label: '思考', value: getScore(d.D5), icon: '🧠' },
+      { label: '表达', value: getScore(d.D6), icon: '💬' }
     ];
   }
 
   function buildPowers(result) {
     const d = result.levels;
     const powers = [];
-    if (d.D1 === 'H') powers.push({ name: '王者气场', desc: '你一进门全场自动安静，你不开口大家不敢散会' });
-    if (d.D2 === 'H') powers.push({ name: '吸金体质', desc: '钱会自己找上门，你买菜都能找到最便宜那家' });
-    if (d.D3 === 'H') powers.push({ name: '学霸光环', desc: '学什么都比别人快，虽然学完可能就忘了' });
-    if (d.D4 === 'H') powers.push({ name: '万人迷', desc: '不用主动就有桃花，你妈比你还急着帮你选' });
-    if (d.D5 === 'H') powers.push({ name: '浪人直觉', desc: '到哪里都能混得开，你的适应能力堪比小强' });
-    if (d.D6 === 'H') powers.push({ name: '第六感', desc: '直觉准到离谱，虽然你经常用来猜外卖还有几分钟到' });
-    if (d.D7 === 'H') powers.push({ name: '社交达人', desc: '到哪都是焦点，你不在的群都在问你去哪了' });
-    if (d.D8 === 'H') powers.push({ name: '叛逆之力', desc: '规则是用来打破的，规定是用来质疑的' });
-    if (d.D9 === 'H') powers.push({ name: '独立之魂', desc: '一个人就是一支队伍，虽然这支队伍经常迟到' });
-    if (d.D10 === 'H') powers.push({ name: '金刚不坏', desc: '决断力拉满，你做决定的速度比别人点外卖还快' });
-    if (d.D11 === 'H') powers.push({ name: '生生不息', desc: '成长速度惊人，你每周都能学会一个新技能——虽然上周的已经忘了' });
-    if (d.D12 === 'H') powers.push({ name: '深不可测', desc: '城府深到没人看得透，连你自己都看不透' });
-    if (d.D13 === 'H') powers.push({ name: '烈火燎原', desc: '热情能点燃任何人，你的朋友圈永远是99+' });
-    if (d.D14 === 'H') powers.push({ name: '磐石之固', desc: '稳如泰山不动摇，你的作息比闹钟还准' });
-    if (d.D15 === 'H') powers.push({ name: '天命感应', desc: '冥冥之中自有安排，你刚想到某人他就联系你了' });
+    if (d.D1 === 'H') powers.push({ name: '控场之王', desc: '你一进门全场自动安静，你不开口大家不敢散会' });
+    if (d.D2 === 'H') powers.push({ name: '说干就干', desc: '你做决定的速度比别人点外卖还快，执行力拉满' });
+    if (d.D3 === 'H') powers.push({ name: '事业狂人', desc: '工作就是你的氧气，996是你的福报' });
+    if (d.D4 === 'H') powers.push({ name: '财感敏锐', desc: '钱会自己找上门，你买菜都能找到最便宜那家' });
+    if (d.D5 === 'H') powers.push({ name: '学霸光环', desc: '学什么都比别人快，虽然学完可能就忘了' });
+    if (d.D6 === 'H') powers.push({ name: '社交达人', desc: '到哪都是焦点，你不在的群都在问你去哪了' });
+    if (d.D7 === 'H') powers.push({ name: '万人迷', desc: '不用主动就有桃花，你妈比你还急着帮你选' });
+    if (d.D8 === 'H') powers.push({ name: '信任满满', desc: '你对人真诚，不轻易怀疑别人，人缘超好' });
+    if (d.D9 === 'H') powers.push({ name: '浪人直觉', desc: '到哪里都能混得开，你的适应能力堪比小强' });
+    if (d.D10 === 'H') powers.push({ name: '第六感', desc: '直觉准到离谱，虽然你经常用来猜外卖还有几分钟到' });
+    if (d.D11 === 'H') powers.push({ name: '深度自省', desc: '你对自己的认知很清晰，虽然有时候想太多' });
+    if (d.D12 === 'H') powers.push({ name: '情绪敏感', desc: '你对情绪的感知力很强，能捕捉到别人忽略的细节' });
+    if (d.D13 === 'H') powers.push({ name: '佛系达人', desc: '能躺着绝不坐着，心态好到让人羡慕' });
+    if (d.D14 === 'H') powers.push({ name: '叛逆之力', desc: '规则是用来打破的，规定是用来质疑的' });
+    if (d.D15 === 'H') powers.push({ name: '警惕之眼', desc: '你对陌生人天然保持距离，安全意识拉满' });
+    if (d.D16 === 'H') powers.push({ name: '完美主义', desc: '你做事精益求精，不到完美不罢休' });
 
     if (powers.length === 0) {
       powers.push({ name: '均衡之力', desc: '五行调和，不偏不倚，你就是传说中的六边形战士——虽然每个边都不太长' });
@@ -682,7 +683,7 @@
     if (d.D2 === 'L') adviceList.push('训练小决定速决，别让细节拖死项目');
     if (d.D5 === 'L') adviceList.push('多读点书或深入钻研一个复杂命题');
     if (d.D6 === 'L') adviceList.push('多写写日记或发个朋友圈分享当下感受');
-    if (d.D12 === 'H') adviceList.push('睡前切断胡思乱想，事情并没有你想 of 那么糟');
+    if (d.D12 === 'H') adviceList.push('睡前切断胡思乱想，事情并没有你想的那么糟');
     if (d.D13 === 'H') adviceList.push('给自己的小奋斗目标定制个奖赏');
     if (d.D15 === 'L') adviceList.push('学着对陌生人保留几分警惕，别轻易交底');
     if (adviceList.length === 0) adviceList.push('保持当前的调和状态，顺其自然即可');
@@ -1072,22 +1073,25 @@
     const shenshaList = document.getElementById('shenshaList');
     const shenshaDescMap = {
       '红鸾': {
-        '动情': '桃花主动导航找你，哪怕足不出户，也有人想方设法逗你开心，桃花运强劲。',
-        '有缘': '异性缘分与人际口碑极佳，适合广结善缘，谈笑风生间便能让人心生好感。'
+        '动': '桃花主动导航找你，哪怕足不出户，也有人想方设法逗你开心，桃花运强劲。',
+        '稳': '异性缘分与人际口碑极佳，适合广结善缘，谈笑风生间便能让人心生好感。'
       },
       '驿马': {
-        '奔波': '心在远方，人总在路途。一换环境就支棱，一闲着就发霉，属于待不住的探索精神。',
-        '平稳': '求稳心态重，喜欢在一个环境里深耕与安定，偏向在熟悉的节奏中寻找安全感。'
+        '动': '心在远方，人总在路途。一换环境就支棱，一闲着就发霉，属于待不住的探索精神。',
+        '稳': '求稳心态重，喜欢在一个环境里深耕与安定，偏向在熟悉的节奏中寻找安全感。'
       },
       '华盖': {
-        '高照': '天生自带神秘清冷感，直觉强到可怕，对神秘学、心理学与艺术感悟极深。',
-        '微隐': '精神世界自成一体，爱发呆出神，内心戏极其丰富，有自己独特的精神角落。'
+        '玄': '天生自带神秘清冷感，直觉强到可怕，对神秘学、心理学与艺术感悟极深。',
+        '雅': '精神世界自成一体，爱发呆出神，内心戏极其丰富，有自己独特的精神角落。'
       },
-      '文昌贵人': {
-        '照命': '考神在线，脑子转得飞快。危机公关与临时抱佛脚届的绝对的神，总能逢凶化吉。'
+      '孤辰': {
+        '重': '你天生就习惯了一个人，孤独对你来说不是惩罚，是奖励。'
       },
-      '禄存财星': {
-        '入庙': '财神爷在你的小本子上悄悄点了个赞，性价比大师，总能踩准省钱与赚钱的窍门。'
+      '禄存': {
+        '旺': '财神爷在你的小本子上悄悄点了个赞，性价比大师，总能踩准省钱与赚钱的窍门。'
+      },
+      '破军': {
+        '烈': '你骨子里就有一股不服输的劲，打破规则是你的本能，破局是你的天赋。'
       }
     };
     if (lastResult.shensha.length > 0) {

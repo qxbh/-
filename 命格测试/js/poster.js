@@ -127,7 +127,7 @@ const XuanxuePoster = (() => {
     // 匹配度
     ctx.fillStyle = '#4d6a53';
     ctx.font = '700 24px "PingFang SC", "Microsoft YaHei", sans-serif';
-    ctx.fillText(`匹配度 ${result.similarity}% · 精准命中 ${result.exactHits}/15 维`, W / 2, 745);
+    ctx.fillText(`匹配度 ${result.similarity}% · 精准命中 ${result.exactHits}/16 维`, W / 2, 745);
 
     // intro
     ctx.fillStyle = '#6a786f';

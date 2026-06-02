@@ -20,7 +20,7 @@ const TYPE_LIBRARY = {
     momWouldSay: '我儿子从小就有主见',
     pattern: 'HMHH-HMHM-MHLH-HHHH',
     weights: [3, 3, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 3, 2, 2]
-    //        D1 D2 D3 D4 D5 D6 D7 D8 D9 D10 D11 D12 D13 D14 D15
+    //        D1 D2 D3 D4 D5 D6 D7 D8 D9 D10 D11 D12 D13 D14 D15 D16
   },
 
   GENERAL: {
