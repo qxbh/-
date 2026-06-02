@@ -86,7 +86,18 @@
     <!-- ═══════════════════════════════════════ -->
     <section id="result-screen" class="screen">
       <div class="result-wrap card">
-        <div class="result-layout">
+
+        <!-- 候选选择界面 -->
+        <div id="candidateSelection" class="candidate-selection">
+          <div class="candidate-header">
+            <h2>✨ 测算完成</h2>
+            <p class="candidate-subtitle">根据你的回答，系统匹配到以下3种命格。请选择最符合你的：</p>
+          </div>
+          <div id="candidateList" class="candidate-list"></div>
+        </div>
+
+        <!-- 完整结果（默认隐藏） -->
+        <div id="fullResult" class="result-layout" style="display:none;">
 
           <!-- 顶部：海报 + 命格类型 -->
           <div class="result-top">

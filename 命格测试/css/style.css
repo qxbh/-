@@ -971,6 +971,100 @@ button:disabled { cursor: not-allowed; opacity: 0.55; transform: none; }
 }
 
 /* ═══════════════════════════════════════ */
+/* 候选选择界面                            */
+/* ═══════════════════════════════════════ */
+.candidate-selection {
+  padding: 24px 20px;
+}
+
+.candidate-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.candidate-header h2 {
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 8px;
+  color: var(--accent-strong);
+}
+
+.candidate-subtitle {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.candidate-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.candidate-card {
+  background: var(--soft);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-inner);
+  padding: 20px;
+  transition: all 0.2s ease;
+}
+
+.candidate-card:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-sm);
+}
+
+.candidate-card .candidate-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.candidate-rank {
+  font-size: 24px;
+}
+
+.candidate-name {
+  font-size: 18px;
+  font-weight: 700;
+  flex: 1;
+}
+
+.candidate-similarity {
+  background: var(--accent);
+  color: white;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.candidate-summary {
+  margin-bottom: 16px;
+}
+
+.candidate-summary p {
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 6px;
+  padding-left: 16px;
+  position: relative;
+}
+
+.candidate-summary p::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
+.candidate-select {
+  width: 100%;
+}
+
+/* ═══════════════════════════════════════ */
 /* 平板响应式 (≤860px)                     */
 /* ═══════════════════════════════════════ */
 @media (max-width: 860px) {
@@ -1179,5 +1273,17 @@ button:disabled { cursor: not-allowed; opacity: 0.55; transform: none; }
 
   .share-box .btn-secondary {
     width: 100%;
+  }
+
+  .candidate-card {
+    padding: 16px;
+  }
+
+  .candidate-card .candidate-header {
+    flex-wrap: wrap;
+  }
+
+  .candidate-name {
+    font-size: 16px;
   }
 }

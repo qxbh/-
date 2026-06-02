@@ -128,33 +128,39 @@ const XuanxueEngine = (() => {
     // 3. 生成用户向量
     const userVector = DIMENSION_ORDER.map(dim => levels[dim]);
 
-    // 4. 与每个命格类型计算距离
+    // 4. 与每个命格类型计算加权距离
     const ranked = NORMAL_TYPES.map(type => {
       const vector = parsePattern(type.pattern);
-      let distance = 0;
+      const weights = type.weights || Array(15).fill(1); // 默认权重为1
+      let weightedDist = 0;
+      let maxPossibleDist = 0;
       let exact = 0;
 
       for (let i = 0; i < vector.length; i++) {
         const diff = Math.abs(levelNum(userVector[i]) - levelNum(vector[i]));
-        distance += diff;
+        weightedDist += diff * weights[i];
+        maxPossibleDist += 2 * weights[i]; // 最大差值2 × 权重
         if (diff === 0) exact += 1;
       }
 
-      const similarity = Math.max(0, Math.round((1 - distance / 30) * 100));
+      // 相似度 = (1 - 加权距离 / 最大可能距离) × 100%
+      const similarity = Math.max(0, Math.round((1 - weightedDist / maxPossibleDist) * 100));
 
       return {
         ...TYPE_LIBRARY[type.code],
-        distance,
+        distance: weightedDist,
         exact,
         similarity
       };
     }).sort((a, b) => {
-      if (a.distance !== b.distance) return a.distance - b.distance;
+      // 先按相似度降序，再按精确命中数降序
+      if (b.similarity !== a.similarity) return b.similarity - a.similarity;
       if (b.exact !== a.exact) return b.exact - a.exact;
-      return b.similarity - a.similarity;
+      return a.distance - b.distance;
     });
 
-    // 5. 取最接近的作为结果
+    // 5. 取前3个作为候选结果
+    const candidates = ranked.slice(0, 3);
     const bestNormal = ranked[0];
     const finalType = bestNormal;
 
@@ -196,6 +202,7 @@ const XuanxueEngine = (() => {
       rawScores,
       levels,
       ranked,
+      candidates,
       bestNormal,
       finalType,
       wuxing,

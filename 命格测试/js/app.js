@@ -538,7 +538,204 @@
   // ═══════════════════════════════════════
   // 结果渲染
   // ═══════════════════════════════════════
+
+  // 为候选结果生成三句话摘要
+  function generateCandidateSummary(type, levels) {
+    const summaries = {
+      EMPR: [
+        '天生的掌控者，走到哪都是C位',
+        '适合当领导，但容易把朋友当员工',
+        '你的字典里没有"随便"两个字'
+      ],
+      GENERAL: [
+        '行动派中的战斗机，说干就干',
+        '执行力满分，但偶尔会冲动上头',
+        '你是那种说"我来"然后真的上的狠人'
+      ],
+      CAREER: [
+        '工作就是你的快乐源泉（认真的）',
+        '别人摸鱼你加班，还觉得挺充实',
+        '建议：适当休息，公司不是你家开的'
+      ],
+      SCHOLAR: [
+        '才华横溢但穷得叮当响',
+        '精神世界极度富裕，物质世界极度贫穷',
+        '你的收藏夹就是你的学习计划——永远不会执行'
+      ],
+      FAME: [
+        '活着就要被人记住，死后也要上热搜',
+        '你发朋友圈不是为了分享，是为了被点赞',
+        '你做每件事都在想"这个能不能发"'
+      ],
+      WANDERER: [
+        '灵魂在远方，身体在出租屋',
+        '你在一个城市待三年就想换',
+        '行李箱永远是半满的，因为随时准备出发'
+      ],
+      REBEL: [
+        '规矩是用来打破的，权威是用来质疑的',
+        '你从小就被说"这孩子很有想法"',
+        '翻译一下就是：这孩子很不听话'
+      ],
+      CHARM: [
+        '走到哪都有人追，手机里永远有未读消息',
+        '你不用主动就有桃花',
+        '你最大的问题是太有魅力了——不知道谁是真心的'
+      ],
+      MERCHANT: [
+        '看什么都是生意，买菜都要砍价',
+        '你买东西第一反应不是"好不好看"而是"值不值"',
+        '砍完价还要送根葱那种'
+      ],
+      FORTUNE: [
+        '含着金汤匙出生，或者含着金汤匙的梦',
+        '你的运气好到让人嫉妒',
+        '抽奖必中、外卖必免单、下雨必带伞'
+      ],
+      LUCKY: [
+        '转发这条锦鲤，不如转发你自己',
+        '你是那种自带好运光环的人',
+        '别人费尽心思才能得到的，你睡一觉就有人送上门'
+      ],
+      SAGE: [
+        '能算别人的命，算不准自己的外卖什么时候到',
+        '你对神秘事物有天然的感应力',
+        '你的直觉准到离谱，虽然经常用来猜外卖'
+      ],
+      MYSTIC: [
+        '别人看不透你，你也看不透你自己',
+        '你的想法很奇怪，你的行为很反常',
+        '但这就是你最迷人的地方'
+      ],
+      HERMIT: [
+        '社恐天花板，能不出门就不出门',
+        '外卖小哥是你唯一的人际关系',
+        '你一个人待着比跟十个人在一起还舒服'
+      ],
+      SPIRIT: [
+        '已经看破红尘，但还没看破外卖红包',
+        '你的灵魂比你的身体先觉醒了',
+        '你开始思考"我是谁"这种终极问题'
+      ],
+      PROTECTOR: [
+        '你不是没有脾气，你只是把脾气留给了欺负你家人的人',
+        '朋友哭你比他还急',
+        '你是那种可以为了别人赴汤蹈火的人'
+      ],
+      LONER: [
+        '天生一个人，死的时候也想一个人',
+        '你不是没有朋友，你是不需要太多朋友',
+        '孤独对你来说不是惩罚，是奖励'
+      ],
+      HARD: [
+        '人生如逆水行舟，不进则退，进了也退',
+        '你的人生就是一部励志片——前90%都是虐心的',
+        '但你知道吗？这些苦难都是在给你攒经验值'
+      ],
+      CLOWN: [
+        '我不是真的快乐，我的笑只是我的保护色',
+        '你就是朋友圈的气氛担当',
+        '哪里有你哪里就有笑声——虽然有时候是你自己笑的'
+      ],
+      FOODIE: [
+        '人生苦短，先吃再说',
+        '你的胃就是你的人生导航',
+        '你人生中最重要的决策都跟吃有关'
+      ],
+      LAZY: [
+        '能躺着绝不坐着，能坐着绝不站着',
+        '你的床是你最亲密的伙伴',
+        '你不是懒，你是节能模式开到了极致'
+      ],
+      GAMER: [
+        '手指比脑子快，键盘比嘴巴利索',
+        '段位比工资高',
+        '你的人生就是一场游戏，虽然经常Game Over但从不放弃'
+      ],
+      ROMANTIC: [
+        '为爱痴狂，为爱流泪，为爱写出八百字小作文',
+        '你对爱情有着极致的浪漫想象',
+        '虽然现实经常打脸'
+      ],
+      NERD: [
+        '脑子是用来装知识的，不是用来社交的',
+        '你觉得最快乐的事就是搞懂一个难题',
+        '你不是书呆子，你是知识的收藏家'
+      ],
+      BOSS: [
+        '不当老板浑身难受，给别人打工觉得屈才',
+        '你打工打到一半就想辞职创业',
+        '你的脑子里每天都有十个创业点子，其中九个半是不靠谱的'
+      ],
+      ORDINARY: [
+        '平平淡淡才是真，没有惊喜也没有意外',
+        '你是一只真正的、原汁原味的人',
+        '你不需要人设，不需要标签，你就是你'
+      ]
+    };
+    return summaries[type.code] || summaries.ORDINARY;
+  }
+
+  // 渲染候选选择界面
+  function renderCandidateSelection() {
+    if (!lastResult || !lastResult.candidates) return;
+
+    const candidateList = document.getElementById('candidateList');
+    candidateList.innerHTML = lastResult.candidates.map((candidate, index) => {
+      const summary = generateCandidateSummary(candidate, lastResult.levels);
+      return `
+        <div class="candidate-card" data-index="${index}">
+          <div class="candidate-header">
+            <span class="candidate-rank">${index === 0 ? '🏆' : index === 1 ? '🥈' : '🥉'}</span>
+            <span class="candidate-name">${candidate.cn}</span>
+            <span class="candidate-similarity">${candidate.similarity}%</span>
+          </div>
+          <div class="candidate-summary">
+            ${summary.map(s => `<p>${s}</p>`).join('')}
+          </div>
+          <button class="btn-primary candidate-select" data-index="${index}">这最像我</button>
+        </div>
+      `;
+    }).join('');
+
+    // 绑定选择事件
+    document.querySelectorAll('.candidate-select').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const index = parseInt(e.target.dataset.index);
+        selectCandidate(index);
+      });
+    });
+  }
+
+  // 选择候选后显示完整结果
+  function selectCandidate(index) {
+    if (!lastResult || !lastResult.candidates) return;
+
+    // 更新 finalType 为用户选择的候选
+    lastResult.finalType = lastResult.candidates[index];
+    lastResult.similarity = lastResult.candidates[index].similarity;
+    lastResult.exactHits = lastResult.candidates[index].exact;
+
+    // 隐藏候选选择，显示完整结果
+    document.getElementById('candidateSelection').style.display = 'none';
+    document.getElementById('fullResult').style.display = 'block';
+
+    // 渲染完整结果
+    renderFullResult();
+  }
+
   function renderResult() {
+    if (!lastResult) return;
+
+    // 显示候选选择界面
+    renderCandidateSelection();
+
+    // 隐藏完整结果
+    document.getElementById('candidateSelection').style.display = 'block';
+    document.getElementById('fullResult').style.display = 'none';
+  }
+
+  function renderFullResult() {
     if (!lastResult) return;
 
     const type = lastResult.finalType;

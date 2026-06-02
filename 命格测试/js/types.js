@@ -18,7 +18,9 @@ const TYPE_LIBRARY = {
     motto: '我说了算。',
     exWouldSay: '跟他在一起很有安全感，但有时候太强势了',
     momWouldSay: '我儿子从小就有主见',
-    pattern: 'HHH-HMH-HHL-MHH-MHH'
+    pattern: 'HHH-HMH-HHL-MHH-MHH',
+    weights: [3, 1, 1, 1, 1, 1, 1, 3, 2, 3, 1, 1, 1, 2, 1]
+    //        D1 D2 D3 D4 D5 D6 D7 D8 D9 D10 D11 D12 D13 D14 D15
   },
 
   GENERAL: {
@@ -35,7 +37,8 @@ const TYPE_LIBRARY = {
     motto: '干就完了！',
     exWouldSay: '跟他在一起很刺激，但有时候太冲动了',
     momWouldSay: '我儿子就是脾气急了点，人是好的',
-    pattern: 'HHL-HMH-HHH-HML-HMM'
+    pattern: 'HHL-HMH-HHH-HML-HMM',
+    weights: [3, 1, 1, 1, 2, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1]
   },
 
   CAREER: {
@@ -52,7 +55,8 @@ const TYPE_LIBRARY = {
     motto: '等我忙完这阵就休息。',
     exWouldSay: '他什么都好，就是没有时间',
     momWouldSay: '我儿子工作很努力，就是不找对象',
-    pattern: 'HMH-HMH-HHM-MHM-HML'
+    pattern: 'HMH-HMH-HHM-MHM-HML',
+    weights: [2, 1, 2, 1, 1, 1, 1, 2, 3, 2, 1, 1, 1, 1, 1]
   },
 
   SCHOLAR: {
@@ -69,7 +73,8 @@ const TYPE_LIBRARY = {
     motto: '腹有诗书气自华。',
     exWouldSay: '他很有才华，但有时候太矫情了',
     momWouldSay: '我儿子从小就爱看书',
-    pattern: 'LML-MLM-MLM-MLL-HHH'
+    pattern: 'LML-MLM-MLM-MLL-HHH',
+    weights: [1, 1, 3, 1, 1, 3, 2, 1, 1, 1, 2, 2, 1, 1, 3]
   },
 
   FAME: {
@@ -86,7 +91,8 @@ const TYPE_LIBRARY = {
     motto: '不火不是人。',
     exWouldSay: '他很好，但他更爱他的粉丝',
     momWouldSay: '我儿子在网上挺有名的',
-    pattern: 'HMH-MHM-HML-MHM-MML'
+    pattern: 'HMH-MHM-HML-MHM-MML',
+    weights: [2, 1, 1, 3, 1, 1, 3, 1, 2, 1, 1, 1, 3, 1, 1]
   },
 
   WANDERER: {
@@ -103,7 +109,8 @@ const TYPE_LIBRARY = {
     motto: '世界那么大，我想去看看。',
     exWouldSay: '他很好，但他不属于任何人',
     momWouldSay: '我儿子又不知道跑哪去了',
-    pattern: 'LLM-MLM-LMM-MLM-HMM'
+    pattern: 'LLM-MLM-LMM-MLM-HMM',
+    weights: [1, 1, 1, 1, 3, 2, 2, 1, 1, 1, 1, 2, 1, 1, 2]
   },
 
   REBEL: {
@@ -120,7 +127,8 @@ const TYPE_LIBRARY = {
     motto: '凭什么？',
     exWouldSay: '他很有个性，但有时候真的太倔了',
     momWouldSay: '我儿子从小就犟，跟他爸一个德行',
-    pattern: 'MLL-HHL-HHL-HHM-HLL'
+    pattern: 'MLL-HHL-HHL-HHM-HLL',
+    weights: [1, 1, 1, 1, 1, 2, 1, 3, 2, 1, 1, 1, 2, 1, 1]
   },
 
   CHARM: {
@@ -137,7 +145,8 @@ const TYPE_LIBRARY = {
     motto: '我不是故意的，是他们自己来的。',
     exWouldSay: '他很好，但追他的人太多了',
     momWouldSay: '我儿子从小就不缺人追',
-    pattern: 'MLM-HLL-MLL-MLM-MHH'
+    pattern: 'MLM-HLL-MLL-MLM-MHH',
+    weights: [1, 1, 1, 3, 1, 1, 3, 1, 1, 1, 1, 1, 3, 1, 2]
   },
 
   MERCHANT: {
@@ -154,7 +163,8 @@ const TYPE_LIBRARY = {
     motto: '这个值多少钱？',
     exWouldSay: '他很会过日子，但有时候太抠了',
     momWouldSay: '我儿子从小就精，从来没亏过',
-    pattern: 'LHM-HHH-MHM-HLM-HMM'
+    pattern: 'LHM-HHH-MHM-HLM-HMM',
+    weights: [1, 3, 1, 1, 1, 1, 2, 1, 2, 2, 1, 1, 1, 1, 1]
   },
 
   FORTUNE: {
@@ -171,7 +181,8 @@ const TYPE_LIBRARY = {
     motto: '运气也是实力的一部分。',
     exWouldSay: '他运气真的好，但有时候太飘了',
     momWouldSay: '我儿子命好，从小就顺',
-    pattern: 'LHH-HHH-HMH-MML-MLL'
+    pattern: 'LHH-HHH-HMH-MML-MLL',
+    weights: [1, 3, 2, 2, 1, 1, 2, 1, 1, 1, 1, 1, 2, 1, 1]
   },
 
   LUCKY: {
@@ -188,7 +199,8 @@ const TYPE_LIBRARY = {
     motto: '今天又是幸运的一天。',
     exWouldSay: '他运气真的好，但有时候太佛了',
     momWouldSay: '我儿子就是命好，没办法',
-    pattern: 'LML-MLL-MLL-MML-MML'
+    pattern: 'LML-MLL-MLL-MML-MML',
+    weights: [1, 2, 1, 1, 2, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1]
   },
 
   SAGE: {
@@ -205,7 +217,8 @@ const TYPE_LIBRARY = {
     motto: '我夜观天象……',
     exWouldSay: '他很神秘，但有时候太神叨了',
     momWouldSay: '我儿子最近在研究什么塔罗牌',
-    pattern: 'LLL-MML-LML-MLL-HHH'
+    pattern: 'LLL-MML-LML-MLL-HHH',
+    weights: [1, 1, 2, 1, 1, 3, 1, 1, 1, 1, 1, 2, 1, 1, 3]
   },
 
   MYSTIC: {
@@ -222,7 +235,8 @@ const TYPE_LIBRARY = {
     motto: '我是谁？',
     exWouldSay: '他很迷人，但我从来没真正了解过他',
     momWouldSay: '我儿子从小就不太说话，但心里有数',
-    pattern: 'LHL-LML-MLL-MLL-HHH'
+    pattern: 'LHL-LML-MLL-MLL-HHH',
+    weights: [1, 1, 2, 1, 1, 3, 1, 1, 1, 1, 1, 3, 1, 1, 3]
   },
 
   HERMIT: {
@@ -239,7 +253,8 @@ const TYPE_LIBRARY = {
     motto: '别来找我。',
     exWouldSay: '他很好，但太安静了',
     momWouldSay: '我儿子就是不爱出门，其他都好',
-    pattern: 'LLL-LML-LLL-LML-HHH'
+    pattern: 'LLL-LML-LLL-LML-HHH',
+    weights: [1, 1, 2, 1, 1, 3, 1, 1, 1, 1, 1, 2, 1, 1, 3]
   },
 
   SPIRIT: {
@@ -256,7 +271,8 @@ const TYPE_LIBRARY = {
     motto: '一切皆是修行。',
     exWouldSay: '他很有深度，但有时候太出世了',
     momWouldSay: '我儿子最近在学什么冥想',
-    pattern: 'LML-LML-LLL-MLL-HHH'
+    pattern: 'LML-LML-LLL-MLL-HHH',
+    weights: [1, 1, 2, 1, 1, 3, 1, 1, 1, 1, 2, 2, 1, 1, 3]
   },
 
   PROTECTOR: {
@@ -273,7 +289,8 @@ const TYPE_LIBRARY = {
     motto: '有我在，别怕。',
     exWouldSay: '他对我太好了，好到我忘了他也有需要',
     momWouldSay: '我儿子从小就心善',
-    pattern: 'HML-MLL-HML-MLL-HMM'
+    pattern: 'HML-MLL-HML-MLL-HMM',
+    weights: [2, 1, 2, 1, 1, 1, 2, 1, 1, 1, 3, 1, 1, 1, 2]
   },
 
   LONER: {
@@ -290,7 +307,8 @@ const TYPE_LIBRARY = {
     motto: '一个人挺好的。',
     exWouldSay: '他很好，但我感觉走不进他的世界',
     momWouldSay: '我儿子就是不太爱说话',
-    pattern: 'LLL-LLL-LLL-LML-HMH'
+    pattern: 'LLL-LLL-LLL-LML-HMH',
+    weights: [1, 1, 1, 1, 2, 3, 1, 1, 2, 1, 1, 2, 1, 1, 2]
   },
 
   HARD: {
@@ -307,7 +325,8 @@ const TYPE_LIBRARY = {
     motto: '明天会好的。',
     exWouldSay: '他真的很努力，我应该多支持他',
     momWouldSay: '我儿子命苦，但一定能出头',
-    pattern: 'HHL-HHL-HHH-HHH-HLL'
+    pattern: 'HHL-HHL-HHH-HHH-HLL',
+    weights: [2, 1, 2, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1]
   },
 
   CLOWN: {
@@ -324,7 +343,8 @@ const TYPE_LIBRARY = {
     motto: '笑一个嘛！',
     exWouldSay: '他很搞笑，但有时候我希望他认真一点',
     momWouldSay: '我儿子从小就爱逗人笑',
-    pattern: 'MLM-MHM-LML-MLL-MML'
+    pattern: 'MLM-MHM-LML-MLL-MML',
+    weights: [1, 1, 1, 2, 1, 1, 3, 1, 1, 1, 1, 1, 2, 1, 1]
   },
 
   FOODIE: {
@@ -341,7 +361,8 @@ const TYPE_LIBRARY = {
     motto: '先吃了再说。',
     exWouldSay: '他做的饭真的很好吃，就是太胖了',
     momWouldSay: '我儿子从小就爱吃',
-    pattern: 'LMH-MML-MLL-HML-MLL'
+    pattern: 'LMH-MML-MLL-HML-MLL',
+    weights: [1, 2, 1, 1, 1, 1, 3, 1, 1, 1, 1, 1, 2, 1, 1]
   },
 
   LAZY: {
@@ -358,7 +379,8 @@ const TYPE_LIBRARY = {
     motto: '今天也是不想动的一天。',
     exWouldSay: '他很好相处，但有时候太佛了',
     momWouldSay: '我儿子就是懒了点，人是聪明的',
-    pattern: 'LLL-LML-LLL-MLL-LLL'
+    pattern: 'LLL-LML-LLL-MLL-LLL',
+    weights: [1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 2, 1, 1, 1, 1]
   },
 
   GAMER: {
@@ -375,7 +397,8 @@ const TYPE_LIBRARY = {
     motto: '再来一把！',
     exWouldSay: '他打游戏的时候别找他',
     momWouldSay: '我儿子天天打游戏，也不知道能干什么',
-    pattern: 'LLM-MLL-LLM-MLL-MMH'
+    pattern: 'LLM-MLL-LLM-MLL-MMH',
+    weights: [1, 1, 1, 1, 2, 2, 1, 1, 2, 1, 1, 1, 1, 1, 1]
   },
 
   ROMANTIC: {
@@ -392,7 +415,8 @@ const TYPE_LIBRARY = {
     motto: '我爱你，与你无关。',
     exWouldSay: '他对我真的很好，但有时候太粘了',
     momWouldSay: '我儿子就是太重感情了',
-    pattern: 'HML-HLL-MLL-MHL-MHH'
+    pattern: 'HML-HLL-MLL-MHL-MHH',
+    weights: [2, 1, 1, 3, 1, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2]
   },
 
   NERD: {
@@ -409,7 +433,8 @@ const TYPE_LIBRARY = {
     motto: '这个我研究一下。',
     exWouldSay: '他很聪明，但有时候太无聊了',
     momWouldSay: '我儿子学习从来不用我操心',
-    pattern: 'LML-MLM-LLL-MLL-HHH'
+    pattern: 'LML-MLM-LLL-MLL-HHH',
+    weights: [1, 1, 3, 1, 1, 2, 1, 1, 1, 1, 2, 2, 1, 1, 3]
   },
 
   BOSS: {
@@ -426,7 +451,8 @@ const TYPE_LIBRARY = {
     motto: '这个项目我投了。',
     exWouldSay: '他很有想法，但有时候太冒进了',
     momWouldSay: '我儿子说要创业，我也不知道靠不靠谱',
-    pattern: 'HHH-LMH-HHL-MHH-MHL'
+    pattern: 'HHH-LMH-HHL-MHH-MHL',
+    weights: [3, 2, 1, 1, 1, 1, 1, 3, 2, 3, 1, 1, 1, 2, 1]
   },
 
   ORDINARY: {
@@ -443,11 +469,13 @@ const TYPE_LIBRARY = {
     motto: '就这样吧。',
     exWouldSay: '他很好，就是太平凡了',
     momWouldSay: '我儿子挺好的，就是没什么特别的',
-    pattern: 'MLL-MLM-MLM-MLM-MLL'
+    pattern: 'MLL-MLM-MLM-MLM-MLL',
+    weights: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
   }
 };
 
 const NORMAL_TYPES = Object.keys(TYPE_LIBRARY).map(code => ({
   code,
-  pattern: TYPE_LIBRARY[code].pattern
+  pattern: TYPE_LIBRARY[code].pattern,
+  weights: TYPE_LIBRARY[code].weights
 }));
