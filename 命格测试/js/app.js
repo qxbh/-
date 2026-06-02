@@ -42,7 +42,7 @@
   let wasComplete = false;
   let totalAnswered = 0;
 
-  const TOTAL_ALL = 55;
+  const TOTAL_ALL = QUESTIONS.length;
 
   // ═══════════════════════════════════════
   // 工具函数
